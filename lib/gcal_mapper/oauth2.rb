@@ -59,22 +59,7 @@ module GcalMapper
         result = @client.execute(:api_method => @service.events.list,
                                  :parameters => {'calendarId' => calendar_id, 'pageToken' => page_token})
       end
-      events_list
-    end
-    
-    def fetch_events(yaml_file, calendar_id)
-      oauth2 = self.new(yaml_file)
       
-      events_list = []
-      if calendar_id == 'all'
-        calendars_list = oauth2.get_calendars_list
-        calendars_list.each do |cal|
-          events_list.push(oauth2.get_events_list(cal.id))
-        end
-      else    
-        events_list = oauth2.get_events_list(calendar_id) 
-      end
-    
       events_list
     end
     
