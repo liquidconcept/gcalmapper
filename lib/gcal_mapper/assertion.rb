@@ -3,16 +3,36 @@ require 'net/http'
 require 'json'
 
 module GcalMapper
+  #
+  # make the authentification for service account and request data from google calendar.
+  #
   class Assertion
     
-    attr_accessor :client_email, :p12_file, :password, :assertion, :access_token
+    # the email given by google for the service account
+    attr_accessor :client_email 
+    # the path to the p12 file that contains the private key
+    attr_accessor :p12_file
+    # the password to the private key file 
+    attr_accessor :password
+    #the token return by google
+    attr_accessor :access_token
     
+    # New object
+    #
+    # @param [String] client_email the email given by google for the service account
+    # @param [String] p12_file the path to the p12 file that contains the private key
+    # @param [String] password the password to the private key file
     def initialize(client_email, p12_file, password='notasecret')
       @client_email = client_email
       @p12_file = p12_file
       @password = password
     end
     
+    
+    # generate the JWT that must be include with the request acess token.
+    # the format of the JWT is (base64url encoded header).(base64url encoded claim set).(base64url encoded signature)
+    #
+    # @return [String] the generate JWT.
     def generate_assertion()
   
       # generating JWT
@@ -34,9 +54,13 @@ module GcalMapper
       sign = key.sign(OpenSSL::Digest::SHA256.new, encoded_header + '.' + encoded_claim)
       encoded_sign = Base64.urlsafe_encode64(sign)
   
-      @assertion = encoded_header + '.' + encoded_claim + '.' + encoded_sign
+      jwt = encoded_header + '.' + encoded_claim + '.' + encoded_sign
     end
     
+    # Prepare all the parameters for sending the request token request to google
+    # and save the token in instance variable.
+    #
+    # @return [Hash] the HTTP response.
     def request_token()
       url = 'https://accounts.google.com/o/oauth2/token'
       data = {
@@ -56,20 +80,31 @@ module GcalMapper
       body
     end
     
+    # Prepare the request to obtain the list of accessible calendar.
+    #
+    # @return [Hash] the HTTP response.
     def get_calendar_list()
       url = 'https://www.googleapis.com/calendar/v3/calendars/liquid-concept.ch_faut85h1u3h2u983d4eho2ropk@group.calendar.google.com/events'
       options = {
         :method => :get,
-        #:headers => {'Authorization' => 'Bearer ' + 'AIzaSyBoltGIP9mOUOgdouu7pip7yood1UTby0k'}
+        :headers => {'Authorization' => 'Bearer ' + @acess_token}
       }
-      execute(url, options)
+      response = execute(url, options)
+      body = JSON.parse(response.body)
     end
     
+    # Set the proxy as environement variable.
+    #
     def proxy
       http_proxy = ENV["http_proxy"]
       URI.parse(http_proxy) rescue nil
     end
     
+    # Execute REST request 
+    #
+    # @param [String] url the complete url of where to send the request
+    # @param [Hash] option contain all the options that can be included in REST request
+    # @return [Sting] the response of the request.
     def execute(url, options = {})
       options = { :parameters => {}, :debug => false, 
                   :http_timeout => 60, :method => :get, 

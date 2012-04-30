@@ -2,10 +2,20 @@ require 'google/api_client'
 require 'yaml'
 
 module GcalMapper
+  
+  #
+  # make the authentification with Oauth2 and request data from google calendar.
+  #
   class Oauth2
     
-    attr_accessor :client, :service
+    # the object [Google::APIClient] from google-api-client
+    attr_accessor :client
+    # the object [Google::APIClient::API] from google-api-client
+    attr_accessor :service
     
+    # intialize client info needed for connection to Oauth2.
+    #
+    # @param [String] yaml_file path to the yaml file which contains acess token, ...
     def initialize (yaml_file)
       oauth_yaml = YAML.load_file(yaml_file)
       @client = Google::APIClient.new
@@ -22,6 +32,9 @@ module GcalMapper
       @service = client.discovered_api('calendar', 'v3')
     end
     
+    # Get the calendar list for the connected user.
+    #
+    # @return [Array] all google calendar data that the user can access.
     def get_calendars_list
       page_token = nil
       result = @client.execute(:api_method => @service.calendar_list.list)
@@ -41,6 +54,10 @@ module GcalMapper
       calendar_list
     end
   
+    # Get all events from specified calendar(s).
+    #
+    # @param [Array] calendar_id contain the calendar(s) id you want to map
+    # @return [Array] all events from given calendar(s) id.
     def get_events_list(calendar_id)
       page_token = nil
       result = @client.execute(
