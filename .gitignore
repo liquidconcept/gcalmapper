@@ -24,3 +24,6 @@ spec/vcr
 _yardoc
 doc
 rdoc
+
+# google api yaml file
+google-api.yaml
