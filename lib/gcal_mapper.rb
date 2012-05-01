@@ -1,50 +1,44 @@
 require 'gcal_mapper/version'
 require 'gcal_mapper/assertion'
 require 'gcal_mapper/oauth2'
+require 'gcal_mapper/datarequest'
+require 'gcal_mapper/authentification'
+require 'gcal_mapper/calendar'
 
 #
 # A library to map Google Calendar events with an ORM.
 #
 module GcalMapper
-  
-  # contains the authentification mode (Oauth2 or Assertion)
-  attr_accessor :auth_mode
-  # path to the auth_file (yaml file for Oauth2, p12 key file for Assertion)
-  attr_accessor :auth_file
-  
-  # Intialize some of the constant module.
-  #
-  # @param [String] auth_file path to your yaml file, or the p12 key
-  # @param [string] auth_mode which mode of autentification you want use 
-  def self.init (auth_file, auth_mode='Oauth2' )
-    @auth_mode = auth_mode
-    @auth_file = auth_file
-  end
-  
-  # Get all events from specified calendar(s).
-  #
-  # @param [Array] calendar_id contain the calendar(s) id you want to map
-  # @return [Array] all events from given calendar(s) id.
-  def self.fetch_events(calendar_id)
-    events_list = calendars_list = calendars_id = []
     
-    if @auth_mode == 'Oauth2'
-      list = self::Oauth2.new(@auth_file)
-      calendars_list = list.get_calendars_list
-      calendars_list.each do |cal|
-        calendars_id.push(cal.id)
-      end     
-      
+    # Get all events from specified calendar(s).
+    #
+    # @param [Array] calendar_id contain the calendar(s) id you want to map
+    # @return [Array] all events from given calendar(s) id.
+    def self.fetch_events(calendar_id, file, client_email=nil, password=nil)
+      events_list = []
+  
+      auth = self::Authentification.new(file, client_email, password)
+      auth.authenticate
+        
+      calendar = self::Calendar.new
+      calendars_list = calendar.get_calendars_list(auth.access_token)
+      if calendars_list.empty?
+        raise Exception.new("No acessible calendar")
+      end
+        
       calendar_id.each do |cal|
-        if calendars_id.include?(cal)
-          events_list.push(list.get_events_list(cal))
+        if calendars_list.include?(cal)
+          if events_list == []
+            events_list = calendar.get_events_list(auth.access_token, cal)
+          else
+            events_list.push(calendar.get_events_list(auth.access_token, cal))
+          end
+        else
+          raise Exception.new("Can't access specified calendar")
         end
       end
-    end
-    
-    events_list
-  end
-
+      events_list
+    end 
 end
 
 
