@@ -1,12 +1,14 @@
 require 'base64'
 require 'json'
+require 'gcal_mapper/authbase'
+
 
 
 module GcalMapper
   #
   # make the authentification for service account and request data from google calendar.
   #
-  class Assertion
+  class Assertion < GcalMapper::Authbase
     
     # the email given by google for the service account
     attr_accessor :client_email 

@@ -1,4 +1,5 @@
 require 'gcal_mapper/version'
+require 'gcal_mapper/authbase'
 require 'gcal_mapper/assertion'
 require 'gcal_mapper/oauth2'
 require 'gcal_mapper/datarequest'

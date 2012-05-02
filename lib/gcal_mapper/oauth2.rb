@@ -1,15 +1,15 @@
 require 'google/api_client'
 require 'yaml'
 require 'json'
+require 'gcal_mapper/authbase'
 
 module GcalMapper
   
   #
   # make the authentification with Oauth2 and request data from google calendar.
   #
-  class Oauth2
+  class Oauth2 < GcalMapper::Authbase
     
-    # the object [Google::APIClient] from google-api-client
     attr_accessor :client_id, :client_secret, :scope, :refresh_token, :access_token
 
     

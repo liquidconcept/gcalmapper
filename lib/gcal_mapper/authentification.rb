@@ -12,9 +12,13 @@ module GcalMapper
     # @param [String] client_email client email of service accout if you use p12 file
     # @param [String] password password of the p12 file
     def initialize(file, client_email=nil, password='notasecret')
-      @file = file
-      @client_email = client_email
-      @password = password
+      if File.exist?(file)
+        @file = file
+        @client_email = client_email
+        @password = password
+       else
+         raise Exception.new("File don't exist")
+       end
     end
     
     # do the authentification for one of the right authentification method
@@ -26,7 +30,7 @@ module GcalMapper
       else
         @auth = GcalMapper::Assertion.new(@file, @client_email, @password)
       end
-      !@auth==nil
+      @auth.access_token!=nil
     end
     
     # Gives the access token
