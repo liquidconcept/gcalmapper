@@ -11,6 +11,10 @@ module GcalMapper
     # Options for the REST request
     attr_accessor :options
     
+    # Initialize a new request
+    #
+    # @param [String] url the complete url of where to send the request
+    # @param [Hash] options contain all the options that can be included in REST request
     def initialize (url, options = {})
       @url = url
       @options = options
@@ -25,10 +29,8 @@ module GcalMapper
     
     # Execute REST request 
     #
-    # @param [String] url the complete url of where to send the request
-    # @param [Hash] option contain all the options that can be included in REST request
-    # @return [Sting] the response of the request.
-    def execute()
+    # @return [Hash] a Json parsed hash that contains the body of the response.
+    def execute
       options = { :parameters => {}, :debug => false, 
                   :http_timeout => 60, :method => :get, 
                   :headers => {}, :redirect_count => 0, 
@@ -44,7 +46,6 @@ module GcalMapper
      
       if url.scheme == 'https'
         http.use_ssl = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       end
          
       http.open_timeout = http.read_timeout = options[:http_timeout]
@@ -62,6 +63,9 @@ module GcalMapper
  
       options[:headers].each { |key, value| request[key] = value }
       response = http.request(request)
+      if !(200..300).include?(response.code.to_i)
+        raise raise Exception.new('Resquest error status ' + response.code)
+      end 
       JSON.parse(response.body)
     end 
   end

@@ -78,7 +78,11 @@ module GcalMapper
         :parameters => data
       }
       req = GcalMapper::Datarequest.new(url, options)
-      response = req.execute
+      begin
+        response = req.execute
+      rescue
+        raise Excetption.new('unable to authenticate')
+      end
     end
   
   end

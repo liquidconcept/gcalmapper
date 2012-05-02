@@ -17,12 +17,16 @@ module GcalMapper
     #
     # @param [String] yaml_file path to the yaml file which contains acess token, ...
     def initialize (yaml_file)
-      oauth_yaml = YAML.load_file(yaml_file)
-      @client_id = oauth_yaml["client_id"]
-      @client_secret = oauth_yaml["client_secret"]
-      @scope = oauth_yaml["scope"]
-      @refresh_token = oauth_yaml["refresh_token"]
-      @access_token = oauth_yaml["access_token"]
+      begin
+        oauth_yaml = YAML.load_file(yaml_file)
+        @client_id = oauth_yaml["client_id"]
+        @client_secret = oauth_yaml["client_secret"]
+        @scope = oauth_yaml["scope"]
+        @refresh_token = oauth_yaml["refresh_token"]
+        @access_token = oauth_yaml["access_token"]
+      rescue
+        raise Excetption.new('unable to authenticate')
+      end
     end
     
   end
