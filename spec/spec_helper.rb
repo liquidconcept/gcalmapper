@@ -2,15 +2,17 @@ require 'rubygems'
 require 'spork'
 require 'rspec'
 
+
 # SimpleCov
 if ENV['COVERAGE']
   require 'simplecov'
-  SimpleCov.start do
-    add_filter 'vendor'
-  end
+  SimpleCov.start 
 end
 
+require 'gcal_mapper'
+
 Spork.prefork do
+  
   #vcr 
   require 'vcr'
   VCR.configure do |c|
@@ -29,6 +31,7 @@ Spork.prefork do
     config.run_all_when_everything_filtered = true
   end
 
+  
 end
 
 Spork.each_run do
