@@ -1,18 +1,15 @@
-require 'google/api_client'
+require 'gcal_mapper/authentification/base'
 require 'yaml'
-require 'json'
-require 'gcal_mapper/authbase'
 
 module GcalMapper
-  
   #
   # make the authentification with Oauth2 and request data from google calendar.
   #
-  class Oauth2 < GcalMapper::Authbase
-    
-    attr_accessor :client_id, :client_secret, :scope, :refresh_token, :access_token
+  class Oauth2 < GcalMapper::Base
 
-    
+    attr_accessor :refresh_token  # refresh token to request new acces token
+    attr_accessor :access_token   # access token needed to use api
+
     # intialize client info needed for connection to Oauth2.
     #
     # @param [String] yaml_file path to the yaml file which contains acess token, ...
@@ -25,9 +22,9 @@ module GcalMapper
         @refresh_token = oauth_yaml["refresh_token"]
         @access_token = oauth_yaml["access_token"]
       rescue
-        raise Excetption.new('unable to authenticate')
+        raise GcalMapper::AuthFileError
       end
     end
-    
+
   end
 end

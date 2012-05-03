@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe GcalMapper::Authbase do
+describe GcalMapper::Base do
   before :all do
-    class DummyClass < GcalMapper::Authbase
+    class DummyClass < GcalMapper::Base
     end
     
     @dummy = DummyClass.new
