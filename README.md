@@ -57,7 +57,7 @@ Now you can access google calendar with this api
 
 copy the file ".p12" to spec/file/privatekey.p12
 
-execute(all on the same lien) with the data of the installed app
+execute, with the data of the installed app
     
     google-api oauth-2-login --scope=https://www.googleapis.com/auth/calendar --client-id=[CLIENT_ID] --client-secret=[CLIENT_SECRET]
 
