@@ -1,13 +1,6 @@
 require 'spec_helper'
 
 describe GcalMapper::Authentification do
-  before :all do
-    @yaml = 'spec/file/.google-api.yaml'
-    @yaml2 = '~/.google-api.yaml'
-    @bad_yaml = 'spec/file/test.yaml'
-    @p12 = 'spec/file/privatekey.p12'
-    @client_email = '491507701942-7bc0pf4187fooffdqp6ao1a0b81v6aj2@developer.gserviceaccount.com'
-  end
   
   it "should raise an error if the file is don't exist" do
     expect {GcalMapper::Authentification.new('/home/test')}.to raise_error
@@ -19,7 +12,7 @@ describe GcalMapper::Authentification do
   end
   
   it "should not raise an error if relative path is given" do
-    auth = GcalMapper::Authentification.new(@yaml2)
+    auth = GcalMapper::Authentification.new(@yaml_relative)
     expect {auth.authenticate}.to_not raise_error
   end
     
@@ -37,4 +30,5 @@ describe GcalMapper::Authentification do
     auth = GcalMapper::Authentification.new(@p12, 'test@dtest.com')
     expect {auth.authenticate}.to raise_error
   end
+  
 end

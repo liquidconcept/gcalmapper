@@ -2,12 +2,8 @@ require 'spec_helper'
 
 describe GcalMapper::Calendar do
   before :all do
-    @yaml = 'spec/file/.google-api.yaml'
-    @calendar_id = 'neville.dubuis@liquid-concept.ch'
-    
     @auth_oauth2 = GcalMapper::Authentification.new(@yaml)
     @auth_oauth2.authenticate
-    
     @bad_token = 'a bad token'
   end
   
