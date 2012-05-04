@@ -10,18 +10,19 @@ module GcalMapper
     class Assertion < Authentification::Base
 
       attr_accessor :client_email   # the email given by google for the service account
-      attr_accessor :p12_file       # the path to the p12 file that contains the private key
-      attr_accessor :password       # the password to the private key file
-      attr_accessor :access_token   #the token return by google
+      attr_accessor :user_email     # the email of the user to impersonate
+      attr_accessor :access_token   # the token return by google
 
       # New object
       #
-      # @param [String] client_email the email given by google for the service account
-      # @param [String] p12_file the path to the p12 file that contains the private key
-      # @param [String] password the password to the private key file
-      def initialize(p12_file, client_email, password='notasecret')
+      # @param [String] p12_file the path to the p12 key file
+      # @param [String] client_email email from the api_consol
+      # @param [String] user_email email from the impersonated user
+      # @param [String] password p12 key password
+      def initialize(p12_file, client_email, user_email, password)
         @client_email = client_email
         @p12_file = p12_file
+        @user_email = user_email
         @password = password
         @access_token = request_token['access_token']
       end
@@ -37,7 +38,8 @@ module GcalMapper
         utc_time = Time.now.getutc.to_i
         claim = {
           'aud' => 'https://accounts.google.com/o/oauth2/token',
-          'scope'=>'https://www.googleapis.com/auth/calendar.readonly',
+          'scope'=>'http://www.google.com/calendar/feeds/ ',
+          'prn' => @user_email,
           'iat' => utc_time,
           'exp' => utc_time+3600,
           'iss' => @client_email
