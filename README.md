@@ -44,7 +44,7 @@ then go to : https://code.google.com/apis/console and open a new api account :
 7. chose the type between "service account" and "installed app" *
 8. click "create client id"
 
-* For testing purpose you need to do both, don't forget to save the file that
+For testing purpose you need to do both, don't forget to save the file that
 google ask to download. You can use service account only if you manage your 
 domain with google. But you have to go to your google apps manager :
 
