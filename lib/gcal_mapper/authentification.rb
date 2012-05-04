@@ -28,9 +28,9 @@ module GcalMapper
     # @return [Bool] true if instantiation ok
     def authenticate
       if client_email==nil
-        @auth = GcalMapper::Oauth2.new(@file)
+        @auth = Authentification::Oauth2.new(@file)
       else
-        @auth = GcalMapper::Assertion.new(@file, @client_email, @password)
+        @auth = Authentification::Assertion.new(@file, @client_email, @password)
       end
 
       !access_token.nil?
