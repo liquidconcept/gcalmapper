@@ -63,7 +63,7 @@ module GcalMapper
       options[:headers].each { |key, value| request[key] = value }
       response = http.request(request)
       if !(200..300).include?(response.code.to_i)
-        raise GcalMapper::BadHTTPStatus
+        raise GcalMapper::ResponseStatusError
       end
 
       JSON.parse(response.body)

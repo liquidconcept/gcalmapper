@@ -16,19 +16,19 @@ module GcalMapper
   #
   # An error which is raised when the http status code of the respose is not within 200..300
   #
-  class BadHTTPStatus < StandardError
+  class ResponseStatusError < StandardError
   end
 
   #
   # An exception which is raised when no calenards are accessible.
   #
-  class NoCalendarAvailable < StandardError
+  class CalendarAvailabilityError < StandardError
   end
 
   #
   # An exception which is raised when specified calendar is not available.
   #
-  class CalendarNotAvailable < StandardError
+  class CalendarAccessibilityError < StandardError
   end
 
 end

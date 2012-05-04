@@ -21,7 +21,7 @@ module GcalMapper
     calendar = self::Calendar.new
     calendars_list = calendar.get_calendars_list(auth.access_token)
     if calendars_list.empty?
-      raise GcalMapper::NoCalendarAvailable
+      raise GcalMapper::CalendarAvailabilityError
     end
 
     calendar_id.each do |cal|
@@ -32,7 +32,7 @@ module GcalMapper
           events_list.push(calendar.get_events_list(auth.access_token, cal))
         end
       else
-        raise GcalMapper::CalendarNotAvailable
+        raise GcalMapper::CalendarAccessibilityError
       end
     end
     events_list
