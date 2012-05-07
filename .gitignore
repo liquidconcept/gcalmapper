@@ -17,10 +17,15 @@ tmp
 coverage
 
 # ignore vcr files
-spec/vcr 
+spec/vcr
+spec/vcr/**/* 
+spec/file
 
 # YARD artifacts
 .yardoc
 _yardoc
 doc
 rdoc
+
+# google api yaml file
+google-api.yaml
