@@ -14,7 +14,8 @@ Gem::Specification.new do |gem|
   gem.name          = 'gcal_mapper'
   gem.require_paths = ['lib']
   gem.version       = GcalMapper::VERSION
-  
+
+  gem.add_development_dependency 'activerecord'
   gem.add_development_dependency 'rspec',         '>= 2.0'
   gem.add_development_dependency 'vcr'
   gem.add_development_dependency 'fakeweb'
