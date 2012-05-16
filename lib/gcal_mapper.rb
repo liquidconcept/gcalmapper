@@ -4,6 +4,7 @@ require 'gcal_mapper/authentification'
 require 'gcal_mapper/calendar'
 require 'gcal_mapper/errors'
 require 'gcal_mapper/sync'
+require 'gcal_mapper/mapper'
 
 #
 # A library to map Google Calendar events with an ORM.
@@ -40,10 +41,8 @@ module GcalMapper
         raise GcalMapper::CalendarAccessibilityError
       end
     end
+
     events_list
   end
 
 end
-
-
-

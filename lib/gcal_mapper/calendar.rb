@@ -37,10 +37,10 @@ module GcalMapper
     # @param [Array] calendar_id contain the calendar(s) id you want to map
     # @return [Array] all events from given calendar(s) id.
     def get_events_list(access_token, calendar_id)
-      url = 'https://www.googleapis.com/calendar/v3/calendars/'+calendar_id+'/events'
+      url = 'https://www.googleapis.com/calendar/v3/calendars/'+calendar_id+'/events?showDeleted=true'
       options = {
         :method => :get,
-        :headers => {'Authorization' => 'Bearer ' + access_token}
+        :headers => {'Authorization' => 'Bearer ' + access_token},
       }
       req = GcalMapper::RestRequest.new(url, options)
       response = req.execute
