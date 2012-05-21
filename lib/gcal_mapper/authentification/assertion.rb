@@ -38,7 +38,7 @@ module GcalMapper
         utc_time = Time.now.getutc.to_i
         claim = {
           'aud' => 'https://accounts.google.com/o/oauth2/token',
-          'scope'=>'http://www.google.com/calendar/feeds/ ',
+          'scope'=> 'https://www.googleapis.com/auth/calendar',
           'prn' => @user_email,
           'iat' => utc_time,
           'exp' => utc_time+3600,
