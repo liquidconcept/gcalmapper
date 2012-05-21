@@ -1,0 +1,108 @@
+#!/usr/bin/env ruby
+bin_dir = File.expand_path("..", __FILE__)
+lib_dir = File.expand_path("../lib", bin_dir)
+
+$LOAD_PATH.unshift(lib_dir)
+$LOAD_PATH.uniq!
+
+require 'launchy'
+require 'socket'
+require 'gcal_mapper'
+
+OAUTH_SERVER_PORT = 12736
+
+options = {}
+
+opt_parser = OptionParser.new do |opt|
+
+  opt.on('--client_id CLIENT_ID', 'your client id') do |client_id|
+    options[:client_id] = client_id
+  end
+
+  opt.on('--client_secret CLIENT_SECRET', 'your client secret') do |client_secret|
+    options[:client_secret] = client_secret
+  end
+
+  opt.on('-f FILE', '--file FILE', 'the file to save credentials') do |file|
+    options[:file] = file
+  end
+
+  opt.on('--scope SCOPE', 'the scope to ask authorization for') do |scope|
+    options[:scope] = scope
+
+  end
+
+end
+
+opt_parser.parse!
+options[:scope] = 'https://www.googleapis.com/auth/calendar' if options[:scope].nil?
+options[:file] = '~/google_auth.yaml' if options[:file].nil?
+
+authorize_url = 'https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=auto&'
+authorize_url += 'client_id=' + options[:client_id] + '&'
+authorize_url += 'redirect_uri=http://localhost:' + OAUTH_SERVER_PORT.to_s + '/&response_type=code&'
+authorize_url += 'scope=' + options[:scope]
+
+# open web browser with the authorisation page
+Launchy.open(authorize_url)
+
+msg = ''
+
+# tcp server to receive the response and close the window
+server = TCPServer.new('0.0.0.0', OAUTH_SERVER_PORT)
+loop do
+  Thread.new(server.accept) do |client|
+    msg = client.readline
+    body = "<html><head><script>function closeWindow() {window.open('', '_self', '');window.close();} setTimeout(closeWindow, 10);</script></head><body>You may close this window.</body></html>\r\n"
+    headers = [
+      "",
+      "HTTP/1.1 200 OK",
+      "Date: Fri, 30 Sep 2011 08:11:27 GMT",
+      "Server: TCP socket test",
+      "Content-Type: text/html; charset=iso-8859-1",
+      "Content-Length: #{body.length}\r\n\r\n"].join("\r\n")
+
+    client.write headers
+    client.write body
+
+    client.close
+  end
+
+  sleep(1.0/24.0)
+  break if msg.include?('code')
+end
+
+# keep just the authorization code
+msg.slice!('GET /?code=')
+msg.chop!
+msg.slice!(' HTTP/1.1')
+
+# form rest request and send it
+url = 'https://accounts.google.com/o/oauth2/token'
+data = {
+  'code' => msg,
+  'grant_type'=> 'authorization_code',
+  'redirect_uri' => 'http://localhost:' + OAUTH_SERVER_PORT.to_s + '/',
+  'client_id' => options[:client_id],
+  'client_secret' => options[:client_secret]
+}
+opts = {
+  :method => :post,
+  :headers => {'Content-Type' => 'application/x-www-form-urlencoded'},
+  :parameters => data
+}
+req = GcalMapper::RestRequest.new(url, opts)
+response = req.execute
+
+# store credentials in yaml file
+config = {
+  'mechanism' => 'oauth_2',
+  'scope' => options[:scope],
+  'client_id' => options[:client_id],
+  'client_secret' => options[:client_secret],
+  'access_token' => response['access_token'],
+  'refresh_token' => response['refresh_token']
+}
+config_file = File.expand_path(options[:file])
+open(config_file, 'w') { |file| file.write(YAML.dump(config)) }
+exit(0)
