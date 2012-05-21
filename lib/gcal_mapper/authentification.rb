@@ -45,5 +45,12 @@ module GcalMapper
       @auth.access_token
     end
 
+    # refresh the access token
+    #
+    # @return [string] the access token
+    def refresh_token
+      @auth.refresh_token
+    end
+
   end
 end

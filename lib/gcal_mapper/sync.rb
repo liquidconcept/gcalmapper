@@ -47,7 +47,19 @@ module GcalMapper
       events_list = []
 
       calendar = GcalMapper::Calendar.new
-      calendars_list = calendar.get_calendars_list(@auth.access_token)
+      retried = false
+      begin
+        calendars_list = calendar.get_calendars_list(@auth.access_token)
+      rescue
+        @auth.refresh_token
+        if !retried
+          retried = true
+          retry
+        else
+          raise
+        end
+      end
+
       if calendars_list.empty?
         raise GcalMapper::CalendarAvailabilityError
       end
