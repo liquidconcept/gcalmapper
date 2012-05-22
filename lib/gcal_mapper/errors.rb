@@ -31,4 +31,10 @@ module GcalMapper
   class CalendarAccessibilityError < StandardError
   end
 
+  #
+  # Error when there is error in user DSL
+  #
+  class DSLSyntaxError < StandardError
+  end
+
 end

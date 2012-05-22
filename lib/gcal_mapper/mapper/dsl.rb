@@ -23,6 +23,11 @@ module GcalMapper
       # @param [String] name DB field name
       # @param [Hash] options contains source options used to fill the field
       def field(name, options = {})
+        raise GcalMapper::DSLSyntaxError if !options.include?(:source)
+        options.keys.each do |key|
+           raise GcalMapper::DSLSyntaxError, 'field option not available' if (key != :source && key != :match && key != :default)
+        end
+
         @config.fields.merge!(name => options)
       end
 
@@ -30,6 +35,7 @@ module GcalMapper
       #
       # @param [Hash] options contains the stuff to configure authetification
       def configure(options = {})
+        raise GcalMapper::DSLSyntaxError, 'you must give a credential file' if options[:file].nil?
         @config.file = options[:file]
         @config.client_email = options[:client_email]
         @config.user_email = options[:user_email]
