@@ -11,7 +11,7 @@ module GcalMapper
       end
 
       # raise error if this method is called -> mean that child class has not implemeted this method
-      def access_token= (acess_token)
+      def refresh_token
         raise NotImplementedError
       end
 

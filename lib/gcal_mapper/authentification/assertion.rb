@@ -11,7 +11,6 @@ module GcalMapper
 
       attr_accessor :client_email   # the email given by google for the service account
       attr_accessor :user_email     # the email of the user to impersonate
-      attr_accessor :access_token   # the token return by google
 
       # New object
       #
@@ -24,9 +23,29 @@ module GcalMapper
         @p12_file = p12_file
         @user_email = user_email
         @password = password
-        @access_token = request_token['access_token']
+        request_token
+        @validity = Time.now.getutc.to_i
       end
 
+      # give the acess token for th application and refresh if it is outdated
+      #
+      # @return [String] access token
+      def access_token
+        if Time.now.getutc.to_i - @validity > 3600
+          refresh_token
+        end
+
+        @access_token
+      end
+
+      # refresh the token by asking for a new one
+      #
+      # @return [String] access token
+      def refresh_token
+        request_token
+      end
+
+      private
       # generate the JWT that must be include with the request acess token.
       # the format of the JWT is (base64url encoded header).(base64url encoded claim set).(base64url encoded signature)
       #
@@ -61,7 +80,7 @@ module GcalMapper
       # and save the token in instance variable.
       #
       # @return [Hash] the HTTP response.
-      def request_token()
+      def request_token
         url = 'https://accounts.google.com/o/oauth2/token'
         data = {
           'grant_type' => 'assertion',
@@ -79,8 +98,9 @@ module GcalMapper
         rescue
           raise GcalMapper::AuthentificationError
         end
+        @valididity = Time.now.getutc.to_i
 
-        response
+        @access_token = response['access_token']
       end
 
     end
