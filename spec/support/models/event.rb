@@ -12,7 +12,8 @@ class Event < ActiveRecord::Base
     google_id 'gid'
 
     field 'name', :source => 'summary'
-    field 'description', :source => 'description', :match => '/^category: (.*)$/', :default => nil
+    field 'description', :source => 'description',
+                         :match => '/^category: (.*)$/', :default => 'not categorized'
     field 'status', :source => 'status'
     field 'start_at', :source => 'start.dateTime'
     field 'end_at', :source => 'end.dateTime'

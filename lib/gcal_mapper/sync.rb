@@ -119,13 +119,31 @@ module GcalMapper
     # @param [Hash] event event to save in obj
     def set_attrib(obj, event)
       @config.fields.each do |field, source|
+
         if source[:source].include?('.')
           data = source[:source].split('.')
-          obj.send(field + '=', event[data[0]][data[1]])
+          obj.send(field + '=', eval_value(source, event[data[0]][data[1]]))
         else
-          obj.send(field + '=', event[source[:source]])
+          obj.send(field + '=', eval_value(source, event[source[:source]]))
         end
       end
+    end
+
+    # eval the value from the source options
+    #
+    # @param [Hash] source source of the field
+    # @param [string] raw_data the string extract form google event data
+    # @return the data asked
+    def eval_value(source, raw_data)
+      if !source[:match].nil?
+        reg_ex = eval(source[:match])
+        data = reg_ex.match(raw_data).to_s
+        data = source[:default] if data == ''
+      else
+        data = raw_data
+      end
+
+      data
     end
 
   end
