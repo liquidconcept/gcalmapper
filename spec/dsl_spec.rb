@@ -14,6 +14,10 @@ describe GcalMapper::Mapper::DSL do
       expect {@dsl.field('test', {:source => 'test', :match => '/test/', :default => 'test'})}.to_not raise_error
     end
 
+    it "should raise error if regexp is invalid" do
+      expect {@dsl.field('test', {:source => 'test', :match => 'test', :default => 'test'})}.to raise_error
+    end
+
     it "should raise error if :source isn't present" do
       expect {@dsl.field('test', {:match => '/test/', :default => 'test'})}.to raise_error
     end

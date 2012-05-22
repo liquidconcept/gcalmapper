@@ -24,8 +24,17 @@ module GcalMapper
       # @param [Hash] options contains source options used to fill the field
       def field(name, options = {})
         raise GcalMapper::DSLSyntaxError if !options.include?(:source)
-        options.keys.each do |key|
-           raise GcalMapper::DSLSyntaxError, 'field option not available' if (key != :source && key != :match && key != :default)
+
+        options.each do |key, value|
+          raise GcalMapper::DSLSyntaxError, 'field option not available' if (key != :source && key != :match && key != :default)
+
+          if key == :match
+            begin
+              eval(value)
+            rescue
+              raise GcalMapper::DSLSyntaxError, 'invalid regex'
+            end
+          end
         end
 
         @config.fields.merge!(name => options)
