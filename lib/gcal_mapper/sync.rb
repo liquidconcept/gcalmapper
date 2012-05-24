@@ -85,7 +85,7 @@ module GcalMapper
 
       @events_list.each do |event|
 
-        existed_event = klass.find_by_google_id(@config.gid, event['id'])
+        existed_event = klass.find_by(@config.gid, event['id'])
         event_exist = !existed_event.nil?
 
         if event_exist

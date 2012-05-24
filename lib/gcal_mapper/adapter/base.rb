@@ -49,11 +49,11 @@ module GcalMapper
         raise NotImplementedError
       end
 
-      # find an object from his google id
+       # find an object from a field and a value
       #
-      # @param [String] field name of the field where gid is stored
-      # @param [String] google_id the gid to find
-      def find_by_google_id(field, google_id)
+      # @param [String] field name of the field where to search
+      # @param [String] value the value to find
+      def find_by(field, value)
         raise NotImplementedError
       end
 
