@@ -2,16 +2,18 @@ require 'gcal_mapper/adapter/base'
 require 'gcal_mapper/adapter/to_adapter'
 
 module GcalMapper
+  #
+  # Adapter to abstract orm
+  #
   module Adapter
-    # A collection of registered adapters
+
+    # returns all registered adapters
+    #
+    # @return [Array] collection of registered adapters
     def self.adapters
       @@adapters ||= []
     end
 
-    # All model classes from all registered adapters
-    def self.model_classes
-      self.adapters.map { |a| a.model_classes }.flatten
-    end
   end
 end
 
