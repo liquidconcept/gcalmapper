@@ -1,7 +1,6 @@
-require 'active_record'
+require 'gcal_mapper/adapter'
 
 module GcalMapper
-
   #
   # Provide methods to synch google calendar and local bd
   #
@@ -82,33 +81,28 @@ module GcalMapper
     # Get all events from specified calendar(s). an keep synchronize with the online gcal
     #
     def save_events
-      current_list = @base.all
+      klass = @base.to_adapter
 
       @events_list.each do |event|
-        event_exist = false
 
-        current_list.each do |current|
+        existed_event = klass.find_by_google_id(@config.gid, event['id'])
+        event_exist = !existed_event.nil?
 
-          if current.send(@config.gid) == event['id']
-            event_exist = true
-            if event['status'] == 'cancelled'
-              current.destroy
-            else
-              if current.updated_at != event['updated']
-                set_attrib(current, event)
-                current.save
-              end
+        if event_exist
+          if event['status'] == 'cancelled'
+            klass.delete!(existed_event.id)
+          else
+            updated_attrib = set_attrib(event)
+            current_attrib = existed_event.attributes
+            current_attrib.delete('id')
+            if !current_attrib == updated_attrib
+              klass.update!(current.id, set_attrib(event))
             end
-
-            break
           end
         end
 
         if !event_exist && event['status'] != 'cancelled'
-          obj = @base.new
-          obj.send(@config.gid + '=', event['id'])
-          set_attrib(obj, event)
-          obj.save
+          klass.create!(set_attrib(event))
         end
       end
     end
@@ -117,16 +111,19 @@ module GcalMapper
     #
     # @param [Object] obj instancied obj to set
     # @param [Hash] event event to save in obj
-    def set_attrib(obj, event)
+    def set_attrib(event)
+      attrib_hash = {@config.gid => event['id']}
       @config.fields.each do |field, source|
 
         if source[:source].include?('.')
           data = source[:source].split('.')
-          obj.send(field + '=', eval_value(source, event[data[0]][data[1]]))
+          attrib_hash[field] = eval_value(source, event[data[0]][data[1]])
         else
-          obj.send(field + '=', eval_value(source, event[source[:source]]))
+          attrib_hash[field] = eval_value(source, event[source[:source]])
         end
       end
+
+      attrib_hash
     end
 
     # eval the value from the source options

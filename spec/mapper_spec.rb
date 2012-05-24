@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'active_record'
 
 describe GcalMapper::Mapper do
 
