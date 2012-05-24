@@ -27,9 +27,11 @@ describe GcalMapper::Mapper do
   end
 
   it "should erase cancelled event", :vcr do
-    before = Event.count
-    Event.synchronize_calendar
-    Event.count.should eq(before-1)
+    cancelled = 0
+    Event.all.each do |event|
+      cancelled += 1 if event.status == 'cancelled'
+    end
+    cancelled.should eq(0)
   end
 
 end
