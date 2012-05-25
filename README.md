@@ -66,7 +66,7 @@ when you manage to have the authorization to access your google calendar create 
 
     class Event < ActiveRecord::Base
 
-      include GcalMapper::Mapper
+      include GcalMapper::Mapper::ActiveRecord
 
       calendar do
         configure :file => 'path/to/your/yaml/file.yaml'
@@ -77,7 +77,7 @@ when you manage to have the authorization to access your google calendar create 
 
         field 'name', :source => 'summary'
         field 'description', :source => 'description',
-                             :match => '/^category: (.*)$/', :default => 'not categorized'
+                             :match => /^category: (.*)$/, :default => 'not categorized'
         field 'status', :source => 'status'
         field 'start_at', :source => 'start.dateTime'
         field 'end_at', :source => 'end.dateTime'
@@ -85,7 +85,7 @@ when you manage to have the authorization to access your google calendar create 
         field 'updated_at', :source => 'updated'
       end
 
-      def synchronize_me
+      def self.synchronize_me
         self.synchronize_calendar
       end
 
@@ -259,7 +259,38 @@ for `attendees` :
 
 for `extendedProperties` you can do `extendedProperties.private` but `extendedProperties.private.(field)` will not work
 
+### tricks ##
 
+it's possible to use the module without an ORM :
+
+
+    class Event
+      attr_accessor :id, :gid, :name, :description, :status, :start_at, :end_at, :created_at, :upated_at
+      include GcalMapper::Mapper::Base
+
+      calendar do
+
+        configure :file => 'path/to/your/yaml/file.yaml'
+
+        calendar 'your_email@gmail.com'
+
+        google_id 'gid'
+
+        field 'name', :source => 'summary'
+        field 'description', :source => 'description',
+                             :match => /^category: (.*)$/, :default => 'not categorized'
+        field 'status', :source => 'status'
+        field 'start_at', :source => 'start.dateTime'
+        field 'end_at', :source => 'end.dateTime'
+        field 'created_at', :source => 'created'
+        field 'updated_at', :source => 'updated'
+      end
+
+      def self.synchronize_me
+        self.synchronize_calendar
+      end
+
+    end
 
 Test
 ----
