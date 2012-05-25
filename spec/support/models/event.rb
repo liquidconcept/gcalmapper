@@ -2,7 +2,7 @@ require 'active_record'
 
 class Event < ActiveRecord::Base
 
-  include GcalMapper::Mapper
+  include GcalMapper::Mapper::ActiveRecord
 
   calendar do
     configure :file => '/home/ndubuis/.google-api.yaml'

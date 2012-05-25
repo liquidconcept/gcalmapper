@@ -1,5 +1,3 @@
-require 'gcal_mapper/adapter'
-
 module GcalMapper
   #
   # Provide methods to synch google calendar and local bd
@@ -81,28 +79,28 @@ module GcalMapper
     # Get all events from specified calendar(s). an keep synchronize with the online gcal
     #
     def save_events
-      klass = @base.to_adapter
+      adapter = Mapper.adapter
 
       @events_list.each do |event|
 
-        existed_event = klass.find_by(@config.gid, event['id'])
+        existed_event = adapter.find_by(@config.gid, event['id'])
         event_exist = !existed_event.nil?
 
         if event_exist
           if event['status'] == 'cancelled'
-            klass.delete!(existed_event.id)
+            adapter.delete!(existed_event.id)
           else
             updated_attrib = set_attrib(event)
             current_attrib = existed_event.attributes
             current_attrib.delete('id')
             if !current_attrib == updated_attrib
-              klass.update!(current.id, set_attrib(event))
+              adapter.update!(current.id, set_attrib(event))
             end
           end
         end
 
         if !event_exist && event['status'] != 'cancelled'
-          klass.create!(set_attrib(event))
+          adapter.create!(set_attrib(event))
         end
       end
     end

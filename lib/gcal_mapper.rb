@@ -6,7 +6,6 @@ require 'gcal_mapper/errors'
 require 'gcal_mapper/sync'
 require 'gcal_mapper/mapper'
 require 'gcal_mapper/configuration'
-require 'gcal_mapper/adapter'
 
 #
 # A library to map Google Calendar events with an ORM.

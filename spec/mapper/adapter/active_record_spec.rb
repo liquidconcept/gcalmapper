@@ -1,14 +1,13 @@
 require 'spec_helper'
-require 'gcal_mapper/adapter'
 
-describe GcalMapper::Adapter::ActiveRecord do
+describe GcalMapper::Mapper::ActiveRecord do
 
   before :all do
     class User < ActiveRecord::Base
 
     end
 
-    @klass = GcalMapper::Adapter::ActiveRecord.new(User)
+    @klass = GcalMapper::Mapper::ActiveRecord::ActiveRecord.new(User)
   end
 
   it "should create a new object and save it" do
@@ -21,11 +20,12 @@ describe GcalMapper::Adapter::ActiveRecord do
   end
 
   it "should update an entry" do
-    user_before = User.first
-    @klass.update!(user_before.id, {'name' => 'another_name'})
-    user_after = User.first
+    user = User.first
+    name_before = user.name
+    @klass.update!(user.id, {'name' => 'another_name'})
+    name_after = User.first.name
 
-    user_before.should eql(user_after)
+    name_before.should_not eql(name_after)
   end
 
   it "should delete an entry" do
