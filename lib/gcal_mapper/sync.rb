@@ -132,9 +132,8 @@ module GcalMapper
     # @param [string] raw_data the string extract form google event data
     # @return the data asked
     def eval_value(source, raw_data)
-      if !source[:match].nil?
-        reg_ex = eval(source[:match])
-        data = reg_ex.match(raw_data).to_s
+      if source[:match]
+        data = source[:match].match(raw_data).to_s
         data = source[:default] if data == ''
       else
         data = raw_data

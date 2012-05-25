@@ -4,6 +4,7 @@ module GcalMapper
     # Provide DSL to configure gem
     #
     class DSL
+      VALID_FIELD_OPTIONS = [:source, :match, :default]
 
       # Intitialize config
       #
@@ -23,18 +24,11 @@ module GcalMapper
       # @param [String] name DB field name
       # @param [Hash] options contains source options used to fill the field
       def field(name, options = {})
-        raise GcalMapper::DSLSyntaxError if !options.include?(:source)
+        raise GcalMapper::DSLSyntaxError, 'Source option must be present' if !options.include?(:source)
+        raise GcalMapper::DSLSyntaxError, 'field option not available' if options.keys != VALID_FIELD_OPTIONS & options.keys
 
-        options.each do |key, value|
-          raise GcalMapper::DSLSyntaxError, 'field option not available' if (key != :source && key != :match && key != :default)
-
-          if key == :match
-            begin
-              eval(value)
-            rescue
-              raise GcalMapper::DSLSyntaxError, 'invalid regex'
-            end
-          end
+        if options[:match]
+          raise GcalMapper::DSLSyntaxError, 'invalid regex' if options[:match].class != Regexp
         end
 
         @config.fields.merge!(name => options)
