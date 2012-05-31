@@ -1,7 +1,7 @@
 module GcalMapper
   module Mapper
 
-    module Base
+    module Simple
 
       # execute when the file is included
       #
@@ -9,10 +9,10 @@ module GcalMapper
       def self.included(base)
         base.extend(GcalMapper::Mapper::ClassMethods)
         Mapper.base = base
-        Mapper.adapter = Base.new(base)
+        Mapper.adapter = Simple.new(base)
       end
 
-      class Base
+      class Simple
         attr_reader :events # array of the synchronized events
 
         # new object

@@ -25,7 +25,7 @@ module GcalMapper
       # @param [Hash] options contains source options used to fill the field
       def field(name, options = {})
         raise GcalMapper::DSLSyntaxError, 'Source option must be present' if !options.include?(:source)
-        raise GcalMapper::DSLSyntaxError, 'field option not available' if options.keys != VALID_FIELD_OPTIONS & options.keys
+        raise GcalMapper::DSLSyntaxError, 'field option not available' if (options.keys != VALID_FIELD_OPTIONS & options.keys)
 
         if options[:match]
           raise GcalMapper::DSLSyntaxError, 'invalid regex' if options[:match].class != Regexp

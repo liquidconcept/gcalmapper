@@ -1,6 +1,6 @@
 require 'gcal_mapper/mapper/dsl'
-require 'gcal_mapper/mapper/adapter/active_record'
-require 'gcal_mapper/mapper/adapter/base'
+require 'gcal_mapper/mapper/active_record'
+require 'gcal_mapper/mapper/simple'
 
 module GcalMapper
   #
@@ -12,7 +12,7 @@ module GcalMapper
     #
     # @return [Class] class name of the includer
     def self.base=(base)
-      @@base=base
+      @@base = base
     end
 
     # reader for class varaible base
@@ -26,7 +26,7 @@ module GcalMapper
     #
     # @param [Configuration] config configuration class
     def self.config=(config)
-      @@config=config
+      @@config = config
     end
 
     # getter for config class attributes
@@ -40,7 +40,7 @@ module GcalMapper
     #
     # @param [Configuration] config configuration class
     def self.adapter=(adapter)
-      @@adapter=adapter
+      @@adapter = adapter
     end
 
     # getter for adapter class attributes

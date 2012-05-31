@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe GcalMapper::Mapper::Base do
+describe GcalMapper::Mapper::Simple do
   before :all do
     class User2
       attr_accessor :id, :first_name, :name
     end
 
-    @base = GcalMapper::Mapper::Base::Base.new(User2)
+    @base = GcalMapper::Mapper::Simple::Simple.new(User2)
   end
 
   it "should create a new object and save it" do
