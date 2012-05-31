@@ -7,7 +7,7 @@ class EventJeu < ActiveRecord::Base
   calendar do
     configure :file => '/home/ndubuis/Dev/gcalmapper/spec/file/privatekey2.p12',
               :client_email => '877466408867@developer.gserviceaccount.com',
-              :user_email => 'webmaster@jeunesse-suhy.ch',
+              :user_email => 'webmaster@jeunesse-suchy.ch',
               :password => 'notasecret'
 
     calendar 'webmaster@jeunesse-suchy.ch'

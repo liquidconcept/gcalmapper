@@ -2,7 +2,7 @@ require 'active_record'
 
 class Event < ActiveRecord::Base
 
-  include GcalMapper::Mapper
+  include GcalMapper::Mapper::ActiveRecord
 
   calendar do
     configure :file => '/home/ndubuis/.google-api.yaml'
@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
 
     field 'name', :source => 'summary'
     field 'description', :source => 'description',
-                         :match => '/^category: (.*)$/', :default => 'not categorized'
+                         :match => /^category: (.*)$/, :default => 'not categorized'
     field 'status', :source => 'status'
     field 'start_at', :source => 'start.dateTime'
     field 'end_at', :source => 'end.dateTime'
