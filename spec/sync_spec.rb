@@ -20,8 +20,9 @@ describe GcalMapper::Sync do
     sync.eval_value({:source => 'test', :match => /^test$/, :default => 'default'}, 'test').should eq('test')
   end
 
-  it "should raw data if no regexp given" do
+  it "should give raw data if no regexp given" do
     sync = GcalMapper::Sync.new(nil, nil)
     sync.eval_value({:source => 'test'}, 'raw').should eq('raw')
   end
+
 end

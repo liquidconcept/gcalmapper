@@ -8,6 +8,10 @@ module GcalMapper
     # make the authentification for service account and request data from google calendar.
     #
     class Assertion < Authentification::Base
+      ASSERTION_SCOPE = 'https://www.google.com/calendar/feeds/'  # scope for assertion
+      JWT_HEADER      = {'alg' => 'RS256', 'typ' => 'JWT'}  # header of the jwt to send
+      ASSERTION_TYPE  = 'http://oauth.net/grant_type/jwt/1.0/bearer'  # url to specify which type of assertion
+
 
       attr_accessor :client_email   # the email given by google for the service account
       attr_accessor :user_email     # the email of the user to impersonate
@@ -51,13 +55,12 @@ module GcalMapper
       #
       # @return [String] the generate JWT.
       def generate_assertion()
-        header = {'alg' => 'RS256', 'typ' => 'JWT'}
-        encoded_header = Base64.urlsafe_encode64(header.to_json)
+        encoded_header = Base64.urlsafe_encode64(JWT_HEADER.to_json)
 
         utc_time = Time.now.getutc.to_i
         claim = {
-          'aud' => 'https://accounts.google.com/o/oauth2/token',
-          'scope'=> 'https://www.google.com/calendar/feeds/',
+          'aud' => Authentification::REQUEST_URL,
+          'scope'=> ASSERTION_SCOPE,
           'prn' => @user_email,
           'iat' => utc_time,
           'exp' => utc_time+3600,
@@ -81,10 +84,9 @@ module GcalMapper
       #
       # @return [Hash] the HTTP response.
       def request_token
-        url = 'https://accounts.google.com/o/oauth2/token'
         data = {
           'grant_type' => 'assertion',
-          'assertion_type' => 'http://oauth.net/grant_type/jwt/1.0/bearer',
+          'assertion_type' => ASSERTION_TYPE,
           'assertion' => generate_assertion
         }
         options = {
@@ -92,7 +94,7 @@ module GcalMapper
           :headers => {'Content-Type' => 'application/x-www-form-urlencoded'},
           :parameters => data
         }
-        req = GcalMapper::RestRequest.new(url, options)
+        req = GcalMapper::RestRequest.new(Authentification::REQUEST_URL, options)
         begin
           response = req.execute
         rescue

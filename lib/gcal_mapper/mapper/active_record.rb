@@ -2,7 +2,9 @@ require 'active_record'
 
 module GcalMapper
   module Mapper
-
+    #
+    # module to include when active record is in use
+    #
     module ActiveRecord
 
       # execute when the file is included

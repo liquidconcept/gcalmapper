@@ -17,6 +17,7 @@ YARD::Rake::YardocTask.new do |t|
     '--title',   'gcalMapper',
     '--markup',  'markdown',
     '--charset', 'UTF-8',
+    '--file',    'LICENSE',
     '--protected',
     '--private'
   ]

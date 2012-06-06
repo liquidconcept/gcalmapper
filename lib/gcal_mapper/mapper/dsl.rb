@@ -4,7 +4,7 @@ module GcalMapper
     # Provide DSL to configure gem
     #
     class DSL
-      VALID_FIELD_OPTIONS = [:source, :match, :default]
+      VALID_FIELD_OPTIONS = [:source, :if_empty, :match, :default] # options available in DSL
 
       # Intitialize config
       #

@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
     configure :file => '/home/ndubuis/.google-api.yaml'
 
     calendar 'neville.dubuis@liquid-concept.ch'
+    calendar 'neville.dubuis@liquid-concept.ch'
 
     google_id 'gid'
 

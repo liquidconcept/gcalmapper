@@ -2,7 +2,7 @@ module GcalMapper
   #
   # Extends Rails framework
   #
-  class Railtie < Rails::Railties
+  class Railtie < Rails::Railtie
 
   end
 end

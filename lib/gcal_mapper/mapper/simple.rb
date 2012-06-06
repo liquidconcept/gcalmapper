@@ -1,6 +1,8 @@
 module GcalMapper
   module Mapper
-
+    #
+    # module to include when no orm is used
+    #
     module Simple
 
       # execute when the file is included
@@ -12,6 +14,9 @@ module GcalMapper
         Mapper.adapter = Simple.new(base)
       end
 
+      #
+      # Adapter to use without an orm
+      #
       class Simple
         attr_reader :events # array of the synchronized events
 
@@ -59,8 +64,7 @@ module GcalMapper
             if item
               if @events[index + 1]
                 item = @events[index + 1]
-                @events.index[index + 1]
-                item.index =- 1
+                item.id =- 1
               end
             end
           end

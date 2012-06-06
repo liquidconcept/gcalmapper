@@ -48,8 +48,8 @@ module GcalMapper
       begin
         calendars_list = calendar.get_calendars_list(@auth.access_token)
       rescue
-        @auth.refresh_token
         if !retried
+          @auth.refresh_token
           retried = true
           retry
         else
@@ -62,11 +62,19 @@ module GcalMapper
       end
 
       @config.calendars.each do |cal|
+        events_list = []
         if calendars_list.include?(cal)
-          if events_list == []
-            events_list = calendar.get_events_list(@auth.access_token, cal)
-          else
-            events_list.push(calendar.get_events_list(@auth.access_token, cal))
+          retried = false
+          begin
+            events_list += (calendar.get_events_list(@auth.access_token, cal))
+          rescue
+            if !retried
+              @auth.refresh_token
+              retried = true
+              retry
+            else
+              raise
+            end
           end
         else
           raise GcalMapper::CalendarAccessibilityError
@@ -93,8 +101,8 @@ module GcalMapper
             updated_attrib = set_attrib(event)
             current_attrib = existed_event.attributes
             current_attrib.delete('id')
-            if !current_attrib == updated_attrib
-              adapter.update!(current.id, set_attrib(event))
+            if current_attrib != updated_attrib
+              adapter.update!(existed_event.id, updated_attrib)
             end
           end
         end
@@ -107,17 +115,24 @@ module GcalMapper
 
     # set the object from fields configuration
     #
-    # @param [Object] obj instancied obj to set
     # @param [Hash] event event to save in obj
+    # @return [hash] hash of setted attributes
     def set_attrib(event)
       attrib_hash = {@config.gid => event['id']}
       @config.fields.each do |field, source|
-
         if source[:source].include?('.')
           data = source[:source].split('.')
           attrib_hash[field] = eval_value(source, event[data[0]][data[1]])
         else
           attrib_hash[field] = eval_value(source, event[source[:source]])
+        end
+        if (attrib_hash[field].nil? && source.has_key?(:if_empty))
+          if source[:if_empty].include?('.')
+            data = source[:if_empty].split('.')
+            attrib_hash[field] = eval_value(source, event[data[0]][data[1]])
+          else
+            attrib_hash[field] = eval_value(source, event[source[:if_empty]])
+          end
         end
       end
 

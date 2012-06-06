@@ -3,7 +3,9 @@ require 'spec_helper'
 describe GcalMapper::Mapper::Simple do
   before :all do
     class User2
+      include GcalMapper::Mapper::Simple
       attr_accessor :id, :first_name, :name
+
     end
 
     @base = GcalMapper::Mapper::Simple::Simple.new(User2)
@@ -28,15 +30,15 @@ describe GcalMapper::Mapper::Simple do
   end
 
   it "should delete an entry" do
+    @base.create!({'first_name' => 'a_name', 'name' => 'a_name'})
     before_count = @base.events.count
     user = @base.events[0]
     @base.delete!(user.id)
 
-    before_count.should >(@base.events.count)
+    before_count.should > (@base.events.count)
   end
 
   it "should find an entry from field name and value" do
-    @base.create!({'first_name' => 'a_name', 'name' => 'a_name'})
     @base.create!({'first_name' => 'a_name', 'name' => 'another_name'})
     @base.create!({'first_name' => 'a_name', 'name' => 'different_name'})
 

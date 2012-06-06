@@ -6,6 +6,7 @@ module GcalMapper
   # Abstract which type of authentification is required
   #
   class Authentification
+    REQUEST_URL = 'https://accounts.google.com/o/oauth2/token' # url where to request to authentificate
 
     attr_reader :file           # file that is needed for authentification
     attr_reader :client_email   # for assertion authentification

@@ -7,4 +7,9 @@ describe GcalMapper::Authentification::Assertion do
     auth.should respond_to(:access_token)
   end
 
+  it "should have refresh_token attribute", :vcr do
+    auth = GcalMapper::Authentification::Assertion.new(@p12, @client_email, @user_email, 'notasecret')
+    auth.should respond_to(:refresh_token)
+  end
+
 end

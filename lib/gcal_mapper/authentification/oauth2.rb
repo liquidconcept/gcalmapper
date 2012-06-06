@@ -40,7 +40,6 @@ module GcalMapper
       #
       # @return [String] access token
       def refresh_token
-        url = 'https://accounts.google.com/o/oauth2/token'
         data = {
           'client_id' => @client_id,
           'client_secret' => @client_secret,
@@ -52,7 +51,7 @@ module GcalMapper
           :headers => {'Content-Type' => 'application/x-www-form-urlencoded'},
           :parameters => data
         }
-        req = GcalMapper::RestRequest.new(url, options)
+        req = GcalMapper::RestRequest.new(Authentification::REQUEST_URL, options)
         begin
           response = req.execute
         rescue

@@ -79,8 +79,8 @@ when you manage to have the authorization to access your google calendar create 
         field 'description', :source => 'description',
                              :match => /^category: (.*)$/, :default => 'not categorized'
         field 'status', :source => 'status'
-        field 'start_at', :source => 'start.dateTime'
-        field 'end_at', :source => 'end.dateTime'
+        field 'start_at', :source => 'start.dateTime', :if_empty => 'start.date'
+        field 'end_at', :source => 'end.dateTime', :if_empty => 'end.date'
         field 'created_at', :source => 'created'
         field 'updated_at', :source => 'updated'
       end
@@ -93,6 +93,9 @@ when you manage to have the authorization to access your google calendar create 
 
 here is an example with Oauth2.0 authentification for installed app, as you can see it'is not a rails model and it work with AtiveRecord.
 
+you can find an exemple with rails there :
+
+[GcalMapper Rails exemple][3]
 
 ### configure ##
 
@@ -133,7 +136,58 @@ It is possible to be more precise with the use of `:match` and `:default`
 
 Both are optional, but if you use `:match` without `:default`, the default value will be `nil`
 
-### source data reference ##
+if the data you want to save is not always setted, it'is possible to use `:if_empty`.
+this will try to take data in another field if the source is empty. in the exemple you
+can see the usage as date.dateTime is not always present (for exemple long event that only
+date of start and date of end without hours).
+
+
+Compatibility
+-------------
+
+For now GcalMapper is only compatible with :
+
+- ActiveRecord
+
+it can be extended quite easly
+
+it is possible to use GcalMapper without ORM, juste include
+
+    GcalMapper::Mapper::Simple
+
+like this :
+
+    class Event
+      attr_accessor :id, :gid, :name, :description, :status, :start_at, :end_at, :created_at, :upated_at
+      include GcalMapper::Mapper::Simple
+
+      calendar do
+
+        configure :file => 'path/to/your/yaml/file.yaml'
+
+        calendar 'your_email@gmail.com'
+
+        google_id 'gid'
+
+        field 'name', :source => 'summary'
+        field 'description', :source => 'description',
+                             :match => /^category: (.*)$/, :default => 'not categorized'
+        field 'status', :source => 'status'
+        field 'start_at', :source => 'start.dateTime'
+        field 'end_at', :source => 'end.dateTime'
+        field 'created_at', :source => 'created'
+        field 'updated_at', :source => 'updated'
+      end
+
+      def self.synchronize_me
+        self.synchronize_calendar
+      end
+
+    end
+
+
+Source data reference
+---------------------
 
 here is the reference for the source data :
 
@@ -259,38 +313,6 @@ for `attendees` :
 
 for `extendedProperties` you can do `extendedProperties.private` but `extendedProperties.private.(field)` will not work
 
-### tricks ##
-
-it's possible to use the module without an ORM :
-
-
-    class Event
-      attr_accessor :id, :gid, :name, :description, :status, :start_at, :end_at, :created_at, :upated_at
-      include GcalMapper::Mapper::Base
-
-      calendar do
-
-        configure :file => 'path/to/your/yaml/file.yaml'
-
-        calendar 'your_email@gmail.com'
-
-        google_id 'gid'
-
-        field 'name', :source => 'summary'
-        field 'description', :source => 'description',
-                             :match => /^category: (.*)$/, :default => 'not categorized'
-        field 'status', :source => 'status'
-        field 'start_at', :source => 'start.dateTime'
-        field 'end_at', :source => 'end.dateTime'
-        field 'created_at', :source => 'created'
-        field 'updated_at', :source => 'updated'
-      end
-
-      def self.synchronize_me
-        self.synchronize_calendar
-      end
-
-    end
 
 Test
 ----
@@ -365,3 +387,4 @@ Contributing
 
   [1]: https://code.google.com/apis/console
   [2]: https://developers.google.com/google-apps/calendar/v3/reference/events?hl=fr-FR
+  [3]: https://github.com/ndubuis/gcal_mapper-exemple
