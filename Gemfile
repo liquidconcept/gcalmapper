@@ -11,3 +11,6 @@ gem 'spork', '~> 1.0rc'
 gem 'yard'
 gem 'simplecov'
 gem 'sqlite3'
+
+# Other development dependancies
+gem 'rake'

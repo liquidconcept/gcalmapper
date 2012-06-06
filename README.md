@@ -1,6 +1,8 @@
 gcalMapper
 ==========
 
+[![Build Status](https://secure.travis-ci.org/parrot/parrot.png?branch=master)](http://travis-ci.org/parrot/parrot)
+
 A library to map Google Calendar events with an ORM.
 
 Installation
