@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://accounts.google.com/o/oauth2/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=assertion&assertion_type=http%3A%2F%2Foauth.net%2Fgrant_type%2Fjwt%2F1.0%2Fbearer&assertion=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20vby9vYXV0aDIvdG9rZW4iLCJzY29wZSI6Imh0dHBzOi8vd3d3Lmdvb2dsZS5jb20vY2FsZW5kYXIvZmVlZHMvIiwicHJuIjpudWxsLCJpYXQiOjEzMzg5MDMxNzcsImV4cCI6MTMzODkwNjc3NywiaXNzIjoidGVzdEBkdGVzdC5jb20ifQ%3D%3D.oSM1l6TX_5OJkDGJvPg-lQj68DvycRbPLyUAbZnJ428F7VAfA2h1SwuFBy01DnMvzDgOG7iCVxMa1pfj1kACYoxfLvGKnL-Rpo327rZRGavuS4ejs3CicZBKwM5JGd82BSwf2qfqtcN3BXpi9ulWIfMAFrs4APSHj2-AknjnhW0%3D
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+      connection:
+      - close
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      pragma:
+      - no-cache
+      expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      date:
+      - Tue, 05 Jun 2012 13:32:57 GMT
+      content-type:
+      - application/json
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      connection:
+      - close
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"error\" : \"invalid_grant\"\n}"
+    http_version: '1.1'
+  recorded_at: Tue, 05 Jun 2012 13:32:57 GMT
+recorded_with: VCR 2.1.0

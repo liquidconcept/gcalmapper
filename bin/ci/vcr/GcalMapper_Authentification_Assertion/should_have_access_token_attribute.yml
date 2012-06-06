@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://accounts.google.com/o/oauth2/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=assertion&assertion_type=http%3A%2F%2Foauth.net%2Fgrant_type%2Fjwt%2F1.0%2Fbearer&assertion=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20vby9vYXV0aDIvdG9rZW4iLCJzY29wZSI6Imh0dHBzOi8vd3d3Lmdvb2dsZS5jb20vY2FsZW5kYXIvZmVlZHMvIiwicHJuIjoid2VibWFzdGVyQGpldW5lc3NlLXN1Y2h5LmNoIiwiaWF0IjoxMzM4OTAzMTg1LCJleHAiOjEzMzg5MDY3ODUsImlzcyI6Ijg3NzQ2NjQwODg2N0BkZXZlbG9wZXIuZ3NlcnZpY2VhY2NvdW50LmNvbSJ9.jL_yHwCyhVFglsyN8XFRlkLBgBLjb5CQZsBqYxLgSpcmG-FnaD51NfyLf1chKS79rvU0pHppwisducn5RgepCIjtLpjHbMc-rgz1E7kQP9KxDe0Euhh84lopSBNE-2NCcGf2WWUanFWr63-rMERphbYgs63fM0ljeY0etJwVbNM%3D
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+      connection:
+      - close
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      pragma:
+      - no-cache
+      expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      date:
+      - Tue, 05 Jun 2012 13:33:05 GMT
+      content-type:
+      - application/json
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      connection:
+      - close
+    body:
+      encoding: US-ASCII
+      string: ! "{\n  \"access_token\" : \"1/d3Mdlso3qHNChQ1f6Z6Cgm__CFEN9flU4LiNFWdS72o\",\n
+        \ \"token_type\" : \"Bearer\",\n  \"expires_in\" : 3600\n}"
+    http_version: '1.1'
+  recorded_at: Tue, 05 Jun 2012 13:33:06 GMT
+recorded_with: VCR 2.1.0

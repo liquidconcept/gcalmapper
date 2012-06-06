@@ -359,7 +359,6 @@ this gives you ~/google_auth.yaml copy it on spec/file/google_auth.yaml
 
 then create spec/file/config.yaml, must look like this :
 
-  ---
     p12: 'spec/file/privatekey.p12'     -> path to your p12 key
     p12_2: 'spec/file/privatekey2.p12'  -> path to a second one, can be the same
     client_email: '[your service account's email address]'
@@ -383,6 +382,12 @@ Contributing
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+
+Copyright & License
+-------------------
+
+Copyright (c) 2012 Liquid Concept. See LICENSE for details.
 
 
   [1]: https://code.google.com/apis/console

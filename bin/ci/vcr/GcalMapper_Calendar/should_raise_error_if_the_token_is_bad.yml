@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.googleapis.com/calendar/v3/users/me/calendarList
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      authorization:
+      - Bearer a bad token
+      connection:
+      - close
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      www-authenticate:
+      - AuthSub realm="https://www.google.com/accounts/AuthSubRequest" allowed-scopes="https://www.googleapis.com/auth/calendar.readonly,https://www.googleapis.com/auth/calendar"
+      content-type:
+      - application/json; charset=UTF-8
+      date:
+      - Tue, 05 Jun 2012 13:33:00 GMT
+      expires:
+      - Tue, 05 Jun 2012 13:33:00 GMT
+      cache-control:
+      - private, max-age=0
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      connection:
+      - close
+    body:
+      encoding: US-ASCII
+      string: ! "{\n \"error\": {\n  \"errors\": [\n   {\n    \"domain\": \"global\",\n
+        \   \"reason\": \"authError\",\n    \"message\": \"Invalid Credentials\",\n
+        \   \"locationType\": \"header\",\n    \"location\": \"Authorization\"\n   }\n
+        \ ],\n  \"code\": 401,\n  \"message\": \"Invalid Credentials\"\n }\n}\n"
+    http_version: '1.1'
+  recorded_at: Tue, 05 Jun 2012 13:33:00 GMT
+recorded_with: VCR 2.1.0
