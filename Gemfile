@@ -14,3 +14,7 @@ gem 'sqlite3'
 
 # Other development dependancies
 gem 'rake'
+
+if RUBY_VERSION == '1.8.7'
+  gem 'json_pure'
+end
