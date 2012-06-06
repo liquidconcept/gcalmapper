@@ -1,5 +1,4 @@
 require 'gcal_mapper/authentification/base'
-require 'base64'
 require 'json'
 
 module GcalMapper
@@ -55,7 +54,8 @@ module GcalMapper
       #
       # @return [String] the generate JWT.
       def generate_assertion()
-        encoded_header = Base64.urlsafe_encode64(JWT_HEADER.to_json)
+        encoded_header = [JWT_HEADER.to_json].pack("m0").tr("+/", "-_")
+
 
         utc_time = Time.now.getutc.to_i
         claim = {
@@ -66,7 +66,7 @@ module GcalMapper
           'exp' => utc_time+3600,
           'iss' => @client_email
         }
-        encoded_claim = Base64.urlsafe_encode64(claim.to_json)
+        encoded_claim = [claim.to_json].pack("m0").tr("+/", "-_")
         begin
           p12 = OpenSSL::PKCS12.new(File.read(@p12_file), @password)
         rescue
@@ -74,7 +74,7 @@ module GcalMapper
         end
         key = p12.key
         sign = key.sign(OpenSSL::Digest::SHA256.new, encoded_header + '.' + encoded_claim)
-        encoded_sign = Base64.urlsafe_encode64(sign)
+        encoded_sign = [sign].pack("m0").tr("+/", "-_")
 
         encoded_header + '.' + encoded_claim + '.' + encoded_sign
       end
