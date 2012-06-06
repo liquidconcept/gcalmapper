@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
   include GcalMapper::Mapper::ActiveRecord
 
   calendar do
-    configure :file => '/home/ndubuis/.google-api.yaml'
+    configure :file => 'spec/file/auth.yaml'
 
     calendar 'neville.dubuis@liquid-concept.ch'
     calendar 'neville.dubuis@liquid-concept.ch'
