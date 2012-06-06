@@ -21,8 +21,8 @@ Spork.prefork do
     c.hook_into :fakeweb
     c.configure_rspec_metadata!
     c.default_cassette_options = {
-      record: :new_episodes,
-      allow_playback_repeats: true
+      :record => :new_episodes,
+      :allow_playback_repeats => :true
     }
   end
 
@@ -47,10 +47,5 @@ Spork.prefork do
       @calendar_id = config['calendar_id']
     end
   end
-
-
-end
-
-Spork.each_run do
 
 end
