@@ -1,48 +1,56 @@
----
-http_interactions:
-- request:
+--- 
+recorded_with: VCR 2.2.0
+http_interactions: 
+- request: 
     method: get
     uri: https://www.googleapis.com/calendar/v3/calendars/test/events?showDeleted=true
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      accept:
-      - ! '*/*'
-      user-agent:
-      - Ruby
-      authorization:
-      - Bearer ya29.AHES6ZToFDCI-ibajUSkGzgI9BIkdb_LKAsu7rV2GmXyyTg
-      connection:
+    body: 
+      string: ""
+    headers: 
+      authorization: 
+      - Bearer ya29.AHES6ZRjYuDPouzp8FaJ4THdK3txQgHM9Eu3A75X7-NRpXQ
+      connection: 
       - close
-  response:
-    status:
+      accept: 
+      - "*/*"
+  response: 
+    status: 
       code: 404
       message: Not Found
-    headers:
-      content-type:
-      - application/json; charset=UTF-8
-      date:
-      - Tue, 05 Jun 2012 13:33:00 GMT
-      expires:
-      - Tue, 05 Jun 2012 13:33:00 GMT
-      cache-control:
-      - private, max-age=0
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
+    headers: 
+      x-xss-protection: 
       - 1; mode=block
-      server:
+      date: 
+      - Thu, 07 Jun 2012 10:30:33 GMT
+      cache-control: 
+      - private, max-age=0
+      x-content-type-options: 
+      - nosniff
+      server: 
       - GSE
-      connection:
+      expires: 
+      - Thu, 07 Jun 2012 10:30:33 GMT
+      content-type: 
+      - application/json; charset=UTF-8
+      x-frame-options: 
+      - SAMEORIGIN
+      connection: 
       - close
-    body:
-      encoding: US-ASCII
-      string: ! "{\n \"error\": {\n  \"errors\": [\n   {\n    \"domain\": \"global\",\n
-        \   \"reason\": \"notFound\",\n    \"message\": \"Not Found\"\n   }\n  ],\n
-        \ \"code\": 404,\n  \"message\": \"Not Found\"\n }\n}\n"
-    http_version: '1.1'
-  recorded_at: Tue, 05 Jun 2012 13:33:00 GMT
-recorded_with: VCR 2.1.0
+    body: 
+      string: |
+        {
+         "error": {
+          "errors": [
+           {
+            "domain": "global",
+            "reason": "notFound",
+            "message": "Not Found"
+           }
+          ],
+          "code": 404,
+          "message": "Not Found"
+         }
+        }
+
+    http_version: "1.1"
+  recorded_at: Thu, 07 Jun 2012 10:30:33 GMT

@@ -1,49 +1,49 @@
----
-http_interactions:
-- request:
+--- 
+recorded_with: VCR 2.2.0
+http_interactions: 
+- request: 
     method: post
     uri: https://accounts.google.com/o/oauth2/token
-    body:
-      encoding: US-ASCII
-      string: grant_type=assertion&assertion_type=http%3A%2F%2Foauth.net%2Fgrant_type%2Fjwt%2F1.0%2Fbearer&assertion=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20vby9vYXV0aDIvdG9rZW4iLCJzY29wZSI6Imh0dHBzOi8vd3d3Lmdvb2dsZS5jb20vY2FsZW5kYXIvZmVlZHMvIiwicHJuIjpudWxsLCJpYXQiOjEzMzg5MDMxNzYsImV4cCI6MTMzODkwNjc3NiwiaXNzIjoiODc3NDY2NDA4ODY3QGRldmVsb3Blci5nc2VydmljZWFjY291bnQuY29tIn0%3D.jrG9EK0IOUPSXegfzfvoGm3EnCWCciPdV6FwEFgvs30fGcoA8AczEE_hNkIy-OSswP13amDYAfB5ktcRxVP2wjgVk-JAYrN1gPbws5s_WzlvLVGjTZ6WCmHqWIHJLqLc2YtEiS5PHTVUWsUTxY7GCrkLHFedkHuRNefV034ruqw%3D
-    headers:
-      accept:
-      - ! '*/*'
-      user-agent:
-      - Ruby
-      content-type:
+    body: 
+      string: grant_type=assertion&assertion_type=http%3a%2f%2foauth.net%2fgrant_type%2fjwt%2f1.0%2fbearer&assertion=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9%0a.eyJwcm4iOm51bGwsImlhdCI6MTMzOTA2NTAyOCwic2NvcGUiOiJodHRwczov%0aL3d3dy5nb29nbGUuY29tL2NhbGVuZGFyL2ZlZWRzLyIsImlzcyI6Ijg3NzQ2%0aNjQwODg2N0BkZXZlbG9wZXIuZ3NlcnZpY2VhY2NvdW50LmNvbSIsImF1ZCI6%0aImh0dHBzOi8vYWNjb3VudHMuZ29vZ2xlLmNvbS9vL29hdXRoMi90b2tlbiIs%0aImV4cCI6MTMzOTA2ODYyOH0%3d%0a.pq14GWdtkWCYFgbxrJUUHfQ5H_ToDJx7Dj6vUpk5CzA9dKFEINyaL3A9eR6c%0aEBhIDy4ldqT73TNRpXqdyYsrHjbVcXEmJnjmwSCMImL1W9kXn1FM-jBtaR1G%0a2_PaeeEyUUh1KtSeD0Slq6Ik8pEYt-QyDHXnjBIcXjIeK9GR2-E%3d%0a
+    headers: 
+      content-type: 
       - application/x-www-form-urlencoded
-      connection:
+      connection: 
       - close
-  response:
-    status:
+      accept: 
+      - "*/*"
+  response: 
+    status: 
       code: 200
       message: OK
-    headers:
-      cache-control:
-      - no-cache, no-store, max-age=0, must-revalidate
-      pragma:
-      - no-cache
-      expires:
-      - Fri, 01 Jan 1990 00:00:00 GMT
-      date:
-      - Tue, 05 Jun 2012 13:32:56 GMT
-      content-type:
-      - application/json
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
+    headers: 
+      x-xss-protection: 
       - 1; mode=block
-      server:
+      date: 
+      - Thu, 07 Jun 2012 10:30:28 GMT
+      cache-control: 
+      - no-cache, no-store, max-age=0, must-revalidate
+      x-content-type-options: 
+      - nosniff
+      server: 
       - GSE
-      connection:
+      pragma: 
+      - no-cache
+      expires: 
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      content-type: 
+      - application/json
+      x-frame-options: 
+      - SAMEORIGIN
+      connection: 
       - close
-    body:
-      encoding: US-ASCII
-      string: ! "{\n  \"access_token\" : \"1/NFBLPtUYKyXOqTxXa_pKkAzmzqa52qqgvRWsnY64YT4\",\n
-        \ \"token_type\" : \"Bearer\",\n  \"expires_in\" : 3600\n}"
-    http_version: '1.1'
-  recorded_at: Tue, 05 Jun 2012 13:32:57 GMT
-recorded_with: VCR 2.1.0
+    body: 
+      string: |-
+        {
+          "access_token" : "1/1q-jh9ekFWrMBHzGhHnHyMpw5W3Z1AfqUeKXqQeuDy8",
+          "token_type" : "Bearer",
+          "expires_in" : 3600
+        }
+    http_version: "1.1"
+  recorded_at: Thu, 07 Jun 2012 10:30:29 GMT

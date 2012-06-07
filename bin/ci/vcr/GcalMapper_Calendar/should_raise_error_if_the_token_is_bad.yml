@@ -1,51 +1,60 @@
----
-http_interactions:
-- request:
+--- 
+recorded_with: VCR 2.2.0
+http_interactions: 
+- request: 
     method: get
     uri: https://www.googleapis.com/calendar/v3/users/me/calendarList
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      accept:
-      - ! '*/*'
-      user-agent:
-      - Ruby
-      authorization:
+    body: 
+      string: ""
+    headers: 
+      authorization: 
       - Bearer a bad token
-      connection:
+      connection: 
       - close
-  response:
-    status:
+      accept: 
+      - "*/*"
+  response: 
+    status: 
       code: 401
       message: Unauthorized
-    headers:
-      www-authenticate:
-      - AuthSub realm="https://www.google.com/accounts/AuthSubRequest" allowed-scopes="https://www.googleapis.com/auth/calendar.readonly,https://www.googleapis.com/auth/calendar"
-      content-type:
-      - application/json; charset=UTF-8
-      date:
-      - Tue, 05 Jun 2012 13:33:00 GMT
-      expires:
-      - Tue, 05 Jun 2012 13:33:00 GMT
-      cache-control:
-      - private, max-age=0
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
+    headers: 
+      x-xss-protection: 
       - 1; mode=block
-      server:
+      date: 
+      - Thu, 07 Jun 2012 10:30:32 GMT
+      cache-control: 
+      - private, max-age=0
+      x-content-type-options: 
+      - nosniff
+      server: 
       - GSE
-      connection:
+      expires: 
+      - Thu, 07 Jun 2012 10:30:32 GMT
+      content-type: 
+      - application/json; charset=UTF-8
+      www-authenticate: 
+      - AuthSub realm="https://www.google.com/accounts/AuthSubRequest" allowed-scopes="https://www.googleapis.com/auth/calendar.readonly,https://www.googleapis.com/auth/calendar"
+      x-frame-options: 
+      - SAMEORIGIN
+      connection: 
       - close
-    body:
-      encoding: US-ASCII
-      string: ! "{\n \"error\": {\n  \"errors\": [\n   {\n    \"domain\": \"global\",\n
-        \   \"reason\": \"authError\",\n    \"message\": \"Invalid Credentials\",\n
-        \   \"locationType\": \"header\",\n    \"location\": \"Authorization\"\n   }\n
-        \ ],\n  \"code\": 401,\n  \"message\": \"Invalid Credentials\"\n }\n}\n"
-    http_version: '1.1'
-  recorded_at: Tue, 05 Jun 2012 13:33:00 GMT
-recorded_with: VCR 2.1.0
+    body: 
+      string: |
+        {
+         "error": {
+          "errors": [
+           {
+            "domain": "global",
+            "reason": "authError",
+            "message": "Invalid Credentials",
+            "locationType": "header",
+            "location": "Authorization"
+           }
+          ],
+          "code": 401,
+          "message": "Invalid Credentials"
+         }
+        }
+
+    http_version: "1.1"
+  recorded_at: Thu, 07 Jun 2012 10:30:33 GMT

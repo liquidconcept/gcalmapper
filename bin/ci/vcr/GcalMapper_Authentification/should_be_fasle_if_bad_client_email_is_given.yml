@@ -1,48 +1,47 @@
----
-http_interactions:
-- request:
+--- 
+recorded_with: VCR 2.2.0
+http_interactions: 
+- request: 
     method: post
     uri: https://accounts.google.com/o/oauth2/token
-    body:
-      encoding: US-ASCII
-      string: grant_type=assertion&assertion_type=http%3A%2F%2Foauth.net%2Fgrant_type%2Fjwt%2F1.0%2Fbearer&assertion=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20vby9vYXV0aDIvdG9rZW4iLCJzY29wZSI6Imh0dHBzOi8vd3d3Lmdvb2dsZS5jb20vY2FsZW5kYXIvZmVlZHMvIiwicHJuIjpudWxsLCJpYXQiOjEzMzg5MDMxNzcsImV4cCI6MTMzODkwNjc3NywiaXNzIjoidGVzdEBkdGVzdC5jb20ifQ%3D%3D.oSM1l6TX_5OJkDGJvPg-lQj68DvycRbPLyUAbZnJ428F7VAfA2h1SwuFBy01DnMvzDgOG7iCVxMa1pfj1kACYoxfLvGKnL-Rpo327rZRGavuS4ejs3CicZBKwM5JGd82BSwf2qfqtcN3BXpi9ulWIfMAFrs4APSHj2-AknjnhW0%3D
-    headers:
-      accept:
-      - ! '*/*'
-      user-agent:
-      - Ruby
-      content-type:
+    body: 
+      string: grant_type=assertion&assertion_type=http%3a%2f%2foauth.net%2fgrant_type%2fjwt%2f1.0%2fbearer&assertion=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9%0a.eyJwcm4iOm51bGwsImlhdCI6MTMzOTA2NTAyOSwic2NvcGUiOiJodHRwczov%0aL3d3dy5nb29nbGUuY29tL2NhbGVuZGFyL2ZlZWRzLyIsImlzcyI6InRlc3RA%0aZHRlc3QuY29tIiwiYXVkIjoiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29t%0aL28vb2F1dGgyL3Rva2VuIiwiZXhwIjoxMzM5MDY4NjI5fQ%3d%3d%0a.ectK3yqL7SKDStzXblQinDUg0gbpHdXwaFGiZgU57jmZM89uMPSCHbVZFLkc%0aSkAFhmsUlyKiTmoEYM1u6w-4XebDYBVaOK1tyjBGupr0oGlEgD3-izSYTJ2b%0ahMUTFj1iVC21S_Y5Bj19H4u-xZnRK-SLF4itGjx3W-yS9uNRNQ4%3d%0a
+    headers: 
+      content-type: 
       - application/x-www-form-urlencoded
-      connection:
+      connection: 
       - close
-  response:
-    status:
+      accept: 
+      - "*/*"
+  response: 
+    status: 
       code: 400
       message: Bad Request
-    headers:
-      cache-control:
-      - no-cache, no-store, max-age=0, must-revalidate
-      pragma:
-      - no-cache
-      expires:
-      - Fri, 01 Jan 1990 00:00:00 GMT
-      date:
-      - Tue, 05 Jun 2012 13:32:57 GMT
-      content-type:
-      - application/json
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
+    headers: 
+      x-xss-protection: 
       - 1; mode=block
-      server:
+      date: 
+      - Thu, 07 Jun 2012 10:30:29 GMT
+      cache-control: 
+      - no-cache, no-store, max-age=0, must-revalidate
+      x-content-type-options: 
+      - nosniff
+      server: 
       - GSE
-      connection:
+      pragma: 
+      - no-cache
+      expires: 
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      content-type: 
+      - application/json
+      x-frame-options: 
+      - SAMEORIGIN
+      connection: 
       - close
-    body:
-      encoding: US-ASCII
-      string: ! "{\n  \"error\" : \"invalid_grant\"\n}"
-    http_version: '1.1'
-  recorded_at: Tue, 05 Jun 2012 13:32:57 GMT
-recorded_with: VCR 2.1.0
+    body: 
+      string: |-
+        {
+          "error" : "invalid_grant"
+        }
+    http_version: "1.1"
+  recorded_at: Thu, 07 Jun 2012 10:30:30 GMT

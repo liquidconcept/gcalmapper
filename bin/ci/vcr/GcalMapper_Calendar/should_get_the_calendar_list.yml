@@ -1,357 +1,190 @@
----
-http_interactions:
-- request:
+--- 
+recorded_with: VCR 2.2.0
+http_interactions: 
+- request: 
     method: get
     uri: https://www.googleapis.com/calendar/v3/users/me/calendarList
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      accept:
-      - ! '*/*'
-      user-agent:
-      - Ruby
-      authorization:
+    body: 
+      string: ""
+    headers: 
+      authorization: 
       - Bearer ya29.AHES6ZRJREYirgT3P9mBAl7z4o60_30QWomq4V2qnbS26g
-      connection:
+      connection: 
       - close
-  response:
-    status:
+      accept: 
+      - "*/*"
+  response: 
+    status: 
       code: 401
       message: Unauthorized
-    headers:
-      www-authenticate:
-      - AuthSub realm="https://www.google.com/accounts/AuthSubRequest" allowed-scopes="https://www.googleapis.com/auth/calendar.readonly,https://www.googleapis.com/auth/calendar"
-      content-type:
-      - application/json; charset=UTF-8
-      date:
-      - Tue, 05 Jun 2012 13:32:58 GMT
-      expires:
-      - Tue, 05 Jun 2012 13:32:58 GMT
-      cache-control:
-      - private, max-age=0
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
+    headers: 
+      x-xss-protection: 
       - 1; mode=block
-      server:
+      date: 
+      - Thu, 07 Jun 2012 10:30:30 GMT
+      cache-control: 
+      - private, max-age=0
+      x-content-type-options: 
+      - nosniff
+      server: 
       - GSE
-      connection:
+      expires: 
+      - Thu, 07 Jun 2012 10:30:30 GMT
+      content-type: 
+      - application/json; charset=UTF-8
+      www-authenticate: 
+      - AuthSub realm="https://www.google.com/accounts/AuthSubRequest" allowed-scopes="https://www.googleapis.com/auth/calendar.readonly,https://www.googleapis.com/auth/calendar"
+      x-frame-options: 
+      - SAMEORIGIN
+      connection: 
       - close
-    body:
-      encoding: US-ASCII
-      string: ! "{\n \"error\": {\n  \"errors\": [\n   {\n    \"domain\": \"global\",\n
-        \   \"reason\": \"authError\",\n    \"message\": \"Invalid Credentials\",\n
-        \   \"locationType\": \"header\",\n    \"location\": \"Authorization\"\n   }\n
-        \ ],\n  \"code\": 401,\n  \"message\": \"Invalid Credentials\"\n }\n}\n"
-    http_version: '1.1'
-  recorded_at: Tue, 05 Jun 2012 13:32:58 GMT
-- request:
+    body: 
+      string: |
+        {
+         "error": {
+          "errors": [
+           {
+            "domain": "global",
+            "reason": "authError",
+            "message": "Invalid Credentials",
+            "locationType": "header",
+            "location": "Authorization"
+           }
+          ],
+          "code": 401,
+          "message": "Invalid Credentials"
+         }
+        }
+
+    http_version: "1.1"
+  recorded_at: Thu, 07 Jun 2012 10:30:31 GMT
+- request: 
     method: post
     uri: https://accounts.google.com/o/oauth2/token
-    body:
-      encoding: US-ASCII
-      string: client_id=491507701942.apps.googleusercontent.com&client_secret=AR8sbYKyLEFfLzmc7JNlvNzc&refresh_token=1%2FmnxovneO3SSKB_iYvP_7xDjWMyuydM332vq81NdR6gw&grant_type=refresh_token
-    headers:
-      accept:
-      - ! '*/*'
-      user-agent:
-      - Ruby
-      content-type:
+    body: 
+      string: grant_type=refresh_token&client_secret=AR8sbYKyLEFfLzmc7JNlvNzc&refresh_token=1%2fmnxovneO3SSKB_iYvP_7xDjWMyuydM332vq81NdR6gw&client_id=491507701942.apps.googleusercontent.com
+    headers: 
+      content-type: 
       - application/x-www-form-urlencoded
-      connection:
+      connection: 
       - close
-  response:
-    status:
+      accept: 
+      - "*/*"
+  response: 
+    status: 
       code: 200
       message: OK
-    headers:
-      cache-control:
+    headers: 
+      x-xss-protection: 
+      - 1; mode=block
+      date: 
+      - Thu, 07 Jun 2012 10:30:31 GMT
+      cache-control: 
       - no-cache, no-store, max-age=0, must-revalidate
-      pragma:
+      x-content-type-options: 
+      - nosniff
+      server: 
+      - GSE
+      pragma: 
       - no-cache
-      expires:
+      expires: 
       - Fri, 01 Jan 1990 00:00:00 GMT
-      date:
-      - Tue, 05 Jun 2012 13:32:58 GMT
-      content-type:
+      content-type: 
       - application/json
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
+      x-frame-options: 
       - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      server:
-      - GSE
-      connection:
+      connection: 
       - close
-    body:
-      encoding: US-ASCII
-      string: ! "{\n  \"access_token\" : \"ya29.AHES6ZToFDCI-ibajUSkGzgI9BIkdb_LKAsu7rV2GmXyyTg\",\n
-        \ \"token_type\" : \"Bearer\",\n  \"expires_in\" : 3600\n}"
-    http_version: '1.1'
-  recorded_at: Tue, 05 Jun 2012 13:32:58 GMT
-- request:
+    body: 
+      string: |-
+        {
+          "access_token" : "ya29.AHES6ZRjYuDPouzp8FaJ4THdK3txQgHM9Eu3A75X7-NRpXQ",
+          "token_type" : "Bearer",
+          "expires_in" : 3600
+        }
+    http_version: "1.1"
+  recorded_at: Thu, 07 Jun 2012 10:30:31 GMT
+- request: 
     method: get
     uri: https://www.googleapis.com/calendar/v3/users/me/calendarList
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      accept:
-      - ! '*/*'
-      user-agent:
-      - Ruby
-      authorization:
-      - Bearer ya29.AHES6ZToFDCI-ibajUSkGzgI9BIkdb_LKAsu7rV2GmXyyTg
-      connection:
+    body: 
+      string: ""
+    headers: 
+      authorization: 
+      - Bearer ya29.AHES6ZRjYuDPouzp8FaJ4THdK3txQgHM9Eu3A75X7-NRpXQ
+      connection: 
       - close
-  response:
-    status:
+      accept: 
+      - "*/*"
+  response: 
+    status: 
       code: 200
       message: OK
-    headers:
-      expires:
-      - Tue, 05 Jun 2012 13:32:59 GMT
-      date:
-      - Tue, 05 Jun 2012 13:32:59 GMT
-      cache-control:
-      - private, max-age=0, must-revalidate, no-transform
-      etag:
-      - ! '"UUmvFWyfYNcHJsfQ8tsu1h67YWM/uevXOyRggoQ0PtbYlcY3Q9KZ7jg"'
-      content-type:
-      - application/json; charset=UTF-8
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
+    headers: 
+      x-xss-protection: 
       - 1; mode=block
-      server:
+      date: 
+      - Thu, 07 Jun 2012 10:30:31 GMT
+      cache-control: 
+      - private, max-age=0, must-revalidate, no-transform
+      x-content-type-options: 
+      - nosniff
+      server: 
       - GSE
-      connection:
+      expires: 
+      - Thu, 07 Jun 2012 10:30:31 GMT
+      content-type: 
+      - application/json; charset=UTF-8
+      etag: 
+      - "\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/uevXOyRggoQ0PtbYlcY3Q9KZ7jg\""
+      x-frame-options: 
+      - SAMEORIGIN
+      connection: 
       - close
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        ewogImtpbmQiOiAiY2FsZW5kYXIjY2FsZW5kYXJMaXN0IiwKICJldGFnIjog
-        IlwiVVVtdkZXeWZZTmNISnNmUTh0c3UxaDY3WVdNL055ZFM3VTdVSVM2Nktk
-        bWtYSllVSGJ1aVN0Z1wiIiwKICJpdGVtcyI6IFsKICB7CiAgICJraW5kIjog
-        ImNhbGVuZGFyI2NhbGVuZGFyTGlzdEVudHJ5IiwKICAgImV0YWciOiAiXCJV
-        VW12Rld5ZllOY0hKc2ZROHRzdTFoNjdZV00vNUYyczV1V1hOQVpnOF9Sbzhh
-        RmUzVjJtVllZXCIiLAogICAiaWQiOiAiI2NvbnRhY3RzQGdyb3VwLnYuY2Fs
-        ZW5kYXIuZ29vZ2xlLmNvbSIsCiAgICJzdW1tYXJ5IjogIkFubml2ZXJzYWly
-        ZXMgZXQgw6l2w6luZW1lbnRzIGRlcyBjb250YWN0cyIsCiAgICJkZXNjcmlw
-        dGlvbiI6ICJBbm5pdmVyc2FpcmVzIGV0IGRhdGVzIMOgIGPDqWzDqWJyZXIg
-        ZGUgdm9zIGNvbnRhY3RzIiwKICAgInRpbWVab25lIjogIkV1cm9wZS9adXJp
-        Y2giLAogICAiY29sb3JJZCI6ICIxMiIsCiAgICJzZWxlY3RlZCI6IHRydWUs
-        CiAgICJhY2Nlc3NSb2xlIjogInJlYWRlciIKICB9LAogIHsKICAgImtpbmQi
-        OiAiY2FsZW5kYXIjY2FsZW5kYXJMaXN0RW50cnkiLAogICAiZXRhZyI6ICJc
-        IlVVbXZGV3lmWU5jSEpzZlE4dHN1MWg2N1lXTS9kWXlCMGQ2R0t3ZU4tZjhk
-        dG5wNUdaQVpUVGNcIiIsCiAgICJpZCI6ICJlXzJfZGUjd2Vla251bUBncm91
-        cC52LmNhbGVuZGFyLmdvb2dsZS5jb20iLAogICAic3VtbWFyeSI6ICJXb2No
-        ZW5udW1tZXJuIiwKICAgImRlc2NyaXB0aW9uIjogIldvY2hlbm51bW1lcm4g
-        d8O2Y2hlbnRsaWNoIGFuemVpZ2VuIiwKICAgInRpbWVab25lIjogIkV1cm9w
-        ZS9adXJpY2giLAogICAiY29sb3JJZCI6ICIyIiwKICAgImFjY2Vzc1JvbGUi
-        OiAicmVhZGVyIgogIH0sCiAgewogICAia2luZCI6ICJjYWxlbmRhciNjYWxl
-        bmRhckxpc3RFbnRyeSIsCiAgICJldGFnIjogIlwiVVVtdkZXeWZZTmNISnNm
-        UTh0c3UxaDY3WVdNL3R0REF0dVdHa3NqMXptc2VoT3Jsem41Z19WMFwiIiwK
-        ICAgImlkIjogImp1bGllbi5oZW56ZWxpbkBsaXF1aWQtY29uY2VwdC5jaCIs
-        CiAgICJzdW1tYXJ5IjogIkp1bGllbiBIZW56ZWxpbiAobGlxdWlkKSIsCiAg
-        ICJsb2NhdGlvbiI6ICJMYXVzYW5uZSwgU3Vpc3NlIiwKICAgInRpbWVab25l
-        IjogIkV1cm9wZS9adXJpY2giLAogICAiY29sb3JJZCI6ICI4IiwKICAgInNl
-        bGVjdGVkIjogdHJ1ZSwKICAgImFjY2Vzc1JvbGUiOiAid3JpdGVyIgogIH0s
-        CiAgewogICAia2luZCI6ICJjYWxlbmRhciNjYWxlbmRhckxpc3RFbnRyeSIs
-        CiAgICJldGFnIjogIlwiVVVtdkZXeWZZTmNISnNmUTh0c3UxaDY3WVdNL00z
-        YllkSlhQX2R2enl3NnhRV3JZTjdUczRUd1wiIiwKICAgImlkIjogInlhbm4u
-        bHVncmluQGxpcXVpZC1jb25jZXB0LmNoIiwKICAgInN1bW1hcnkiOiAiWWFu
-        biBMdWdyaW4gKGxpcXVpZCkiLAogICAibG9jYXRpb24iOiAiTGF1c2FubmUs
-        IFN1aXNzZSIsCiAgICJ0aW1lWm9uZSI6ICJFdXJvcGUvWnVyaWNoIiwKICAg
-        ImNvbG9ySWQiOiAiMSIsCiAgICJzZWxlY3RlZCI6IHRydWUsCiAgICJhY2Nl
-        c3NSb2xlIjogIndyaXRlciIKICB9LAogIHsKICAgImtpbmQiOiAiY2FsZW5k
-        YXIjY2FsZW5kYXJMaXN0RW50cnkiLAogICAiZXRhZyI6ICJcIlVVbXZGV3lm
-        WU5jSEpzZlE4dHN1MWg2N1lXTS9VZmNDVnd0eDRsMzVldkRvNVAxNzlRbXlf
-        ajhcIiIsCiAgICJpZCI6ICJuaWNvbGFzLmNvdXR1cmllckBsaXF1aWQtY29u
-        Y2VwdC5jaCIsCiAgICJzdW1tYXJ5IjogIm5pY29sYXMuY291dHVyaWVyQGxp
-        cXVpZC1jb25jZXB0LmNoIiwKICAgImxvY2F0aW9uIjogIkxhdXNhbm5lLCBT
-        dWlzc2UiLAogICAidGltZVpvbmUiOiAiRXVyb3BlL1p1cmljaCIsCiAgICJj
-        b2xvcklkIjogIjI0IiwKICAgInNlbGVjdGVkIjogdHJ1ZSwKICAgImFjY2Vz
-        c1JvbGUiOiAid3JpdGVyIgogIH0sCiAgewogICAia2luZCI6ICJjYWxlbmRh
-        ciNjYWxlbmRhckxpc3RFbnRyeSIsCiAgICJldGFnIjogIlwiVVVtdkZXeWZZ
-        TmNISnNmUTh0c3UxaDY3WVdNL1hYSExJcy1SRkVzbjRlUzZNNGtLUHdFN1lW
-        c1wiIiwKICAgImlkIjogIm5kdWJ1aXNAZ21haWwuY29tIiwKICAgInN1bW1h
-        cnkiOiAiTmV2aWxsZSBEdWJ1aXMiLAogICAidGltZVpvbmUiOiAiRXVyb3Bl
-        L1p1cmljaCIsCiAgICJjb2xvcklkIjogIjkiLAogICAic2VsZWN0ZWQiOiB0
-        cnVlLAogICAiYWNjZXNzUm9sZSI6ICJmcmVlQnVzeVJlYWRlciIKICB9LAog
-        IHsKICAgImtpbmQiOiAiY2FsZW5kYXIjY2FsZW5kYXJMaXN0RW50cnkiLAog
-        ICAiZXRhZyI6ICJcIlVVbXZGV3lmWU5jSEpzZlE4dHN1MWg2N1lXTS9DNFdC
-        TXlZa2FqRlREZXlJUHBNeTZsc1hUekVcIiIsCiAgICJpZCI6ICJsaXF1aWQt
-        Y29uY2VwdC5jaF9mYXV0ODVoMXUzaDJ1OTgzZDRlaG8ycm9wa0Bncm91cC5j
-        YWxlbmRhci5nb29nbGUuY29tIiwKICAgInN1bW1hcnkiOiAidGVzdCIsCiAg
-        ICJkZXNjcmlwdGlvbiI6ICJ0ZXN0IGFnZW5kYSBmb3IgZ2NhbE1hcHBlciIs
-        CiAgICJsb2NhdGlvbiI6ICJMYXVzYW5uZSwgU3Vpc3NlIiwKICAgInRpbWVa
-        b25lIjogIkV1cm9wZS9adXJpY2giLAogICAiY29sb3JJZCI6ICIzIiwKICAg
-        InNlbGVjdGVkIjogdHJ1ZSwKICAgImFjY2Vzc1JvbGUiOiAib3duZXIiCiAg
-        fSwKICB7CiAgICJraW5kIjogImNhbGVuZGFyI2NhbGVuZGFyTGlzdEVudHJ5
-        IiwKICAgImV0YWciOiAiXCJVVW12Rld5ZllOY0hKc2ZROHRzdTFoNjdZV00v
-        cUd4dDljOE1TS2NjRDZ3bFJlWjlPbTVsMWNRXCIiLAogICAiaWQiOiAibmV2
-        aWxsZS5kdWJ1aXNAbGlxdWlkLWNvbmNlcHQuY2giLAogICAic3VtbWFyeSI6
-        ICJuZXZpbGxlLmR1YnVpc0BsaXF1aWQtY29uY2VwdC5jaCIsCiAgICJsb2Nh
-        dGlvbiI6ICJMYXVzYW5uZSwgU3Vpc3NlIiwKICAgInRpbWVab25lIjogIkV1
-        cm9wZS9adXJpY2giLAogICAiY29sb3JJZCI6ICIxNSIsCiAgICJzZWxlY3Rl
-        ZCI6IHRydWUsCiAgICJhY2Nlc3NSb2xlIjogIm93bmVyIiwKICAgImRlZmF1
-        bHRSZW1pbmRlcnMiOiBbCiAgICB7CiAgICAgIm1ldGhvZCI6ICJlbWFpbCIs
-        CiAgICAgIm1pbnV0ZXMiOiAxMAogICAgfSwKICAgIHsKICAgICAibWV0aG9k
-        IjogInBvcHVwIiwKICAgICAibWludXRlcyI6IDEwCiAgICB9CiAgIF0KICB9
-        LAogIHsKICAgImtpbmQiOiAiY2FsZW5kYXIjY2FsZW5kYXJMaXN0RW50cnki
-        LAogICAiZXRhZyI6ICJcIlVVbXZGV3lmWU5jSEpzZlE4dHN1MWg2N1lXTS9j
-        ZnJMTWduNkpoWGVqeUd0VDczQXljbGpiSGNcIiIsCiAgICJpZCI6ICJ5YW5u
-        Lmx1Z3JpbkBzYW5zLXNhdm9pci5uZXQiLAogICAic3VtbWFyeSI6ICJZYW5u
-        IEx1Z3JpbiAocHJpdsOpKSIsCiAgICJkZXNjcmlwdGlvbiI6ICJDYWxlbmRy
-        aWVyIHBlcnNvbm5lbCBkZSBZYW5uIEx1Z3JpbiIsCiAgICJsb2NhdGlvbiI6
-        ICJMYXVzYW5uZSwgU3Vpc3NlIiwKICAgInRpbWVab25lIjogIkV1cm9wZS9a
-        dXJpY2giLAogICAiY29sb3JJZCI6ICIyIiwKICAgInNlbGVjdGVkIjogdHJ1
-        ZSwKICAgImFjY2Vzc1JvbGUiOiAiZnJlZUJ1c3lSZWFkZXIiCiAgfSwKICB7
-        CiAgICJraW5kIjogImNhbGVuZGFyI2NhbGVuZGFyTGlzdEVudHJ5IiwKICAg
-        ImV0YWciOiAiXCJVVW12Rld5ZllOY0hKc2ZROHRzdTFoNjdZV00vcnFTdTF3
-        b1lscXNmdXl0cmU0cGpSaG1BOWF3XCIiLAogICAiaWQiOiAianVsaWVuaGVu
-        emVsaW5AZ21haWwuY29tIiwKICAgInN1bW1hcnkiOiAiSnVsaWVuIEhlbnpl
-        bGluIC0gUHJpdsOpIiwKICAgInRpbWVab25lIjogIkV1cm9wZS9Sb21lIiwK
-        ICAgImNvbG9ySWQiOiAiMTgiLAogICAic2VsZWN0ZWQiOiB0cnVlLAogICAi
-        YWNjZXNzUm9sZSI6ICJmcmVlQnVzeVJlYWRlciIKICB9CiBdCn0K
-    http_version: '1.1'
-  recorded_at: Tue, 05 Jun 2012 13:32:59 GMT
-- request:
+    body: 
+      string: "{\n \"kind\": \"calendar#calendarList\",\n \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/Vui3VFy5X0OBP9SM1srHlq8RYRI\\\"\",\n \"items\": [\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/5F2s5uWXNAZg8_Ro8aFe3V2mVYY\\\"\",\n   \"id\": \"#contacts@group.v.calendar.google.com\",\n   \"summary\": \"Anniversaires et \xC3\xA9v\xC3\xA9nements des contacts\",\n   \"description\": \"Anniversaires et dates \xC3\xA0 c\xC3\xA9l\xC3\xA9brer de vos contacts\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"12\",\n   \"selected\": true,\n   \"accessRole\": \"reader\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/dYyB0d6GKweN-f8dtnp5GZAZTTc\\\"\",\n   \"id\": \"e_2_de#weeknum@group.v.calendar.google.com\",\n   \"summary\": \"Wochennummern\",\n   \"description\": \"Wochennummern w\xC3\xB6chentlich anzeigen\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"2\",\n   \"accessRole\": \"reader\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/ttDAtuWGksj1zmsehOrlzn5g_V0\\\"\",\n   \"id\": \"julien.henzelin@liquid-concept.ch\",\n   \"summary\": \"Julien Henzelin (liquid)\",\n   \"location\": \"Lausanne, Suisse\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"8\",\n   \"selected\": true,\n   \"accessRole\": \"writer\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/M3bYdJXP_dvzyw6xQWrYN7Ts4Tw\\\"\",\n   \"id\": \"yann.lugrin@liquid-concept.ch\",\n   \"summary\": \"Yann Lugrin (liquid)\",\n   \"location\": \"Lausanne, Suisse\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"1\",\n   \"selected\": true,\n   \"accessRole\": \"writer\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/UfcCVwtx4l35evDo5P179Qmy_j8\\\"\",\n   \"id\": \"nicolas.couturier@liquid-concept.ch\",\n   \"summary\": \"nicolas.couturier@liquid-concept.ch\",\n   \"location\": \"Lausanne, Suisse\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"24\",\n   \"selected\": true,\n   \"accessRole\": \"writer\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/XXHLIs-RFEsn4eS6M4kKPwE7YVs\\\"\",\n   \"id\": \"ndubuis@gmail.com\",\n   \"summary\": \"Neville Dubuis\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"9\",\n   \"selected\": true,\n   \"accessRole\": \"freeBusyReader\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/C4WBMyYkajFTDeyIPpMy6lsXTzE\\\"\",\n   \"id\": \"liquid-concept.ch_faut85h1u3h2u983d4eho2ropk@group.calendar.google.com\",\n   \"summary\": \"test\",\n   \"description\": \"test agenda for gcalMapper\",\n   \"location\": \"Lausanne, Suisse\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"3\",\n   \"selected\": true,\n   \"accessRole\": \"owner\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/qGxt9c8MSKccD6wlReZ9Om5l1cQ\\\"\",\n   \"id\": \"neville.dubuis@liquid-concept.ch\",\n   \"summary\": \"neville.dubuis@liquid-concept.ch\",\n   \"location\": \"Lausanne, Suisse\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"15\",\n   \"selected\": true,\n   \"accessRole\": \"owner\",\n   \"defaultReminders\": [\n    {\n     \"method\": \"email\",\n     \"minutes\": 10\n    },\n    {\n     \"method\": \"popup\",\n     \"minutes\": 10\n    }\n   ]\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/cfrLMgn6JhXejyGtT73AycljbHc\\\"\",\n   \"id\": \"yann.lugrin@sans-savoir.net\",\n   \"summary\": \"Yann Lugrin (priv\xC3\xA9)\",\n   \"description\": \"Calendrier personnel de Yann Lugrin\",\n   \"location\": \"Lausanne, Suisse\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"2\",\n   \"selected\": true,\n   \"accessRole\": \"freeBusyReader\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/rqSu1woYlqsfuytre4pjRhmA9aw\\\"\",\n   \"id\": \"julienhenzelin@gmail.com\",\n   \"summary\": \"Julien Henzelin - Priv\xC3\xA9\",\n   \"timeZone\": \"Europe/Rome\",\n   \"colorId\": \"18\",\n   \"selected\": true,\n   \"accessRole\": \"freeBusyReader\"\n  }\n ]\n\
+        }\n"
+    http_version: "1.1"
+  recorded_at: Thu, 07 Jun 2012 10:30:31 GMT
+- request: 
     method: get
     uri: https://www.googleapis.com/calendar/v3/users/me/calendarList
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      accept:
-      - ! '*/*'
-      user-agent:
-      - Ruby
-      authorization:
-      - Bearer ya29.AHES6ZToFDCI-ibajUSkGzgI9BIkdb_LKAsu7rV2GmXyyTg
-      connection:
+    body: 
+      string: ""
+    headers: 
+      authorization: 
+      - Bearer ya29.AHES6ZRjYuDPouzp8FaJ4THdK3txQgHM9Eu3A75X7-NRpXQ
+      connection: 
       - close
-  response:
-    status:
+      accept: 
+      - "*/*"
+  response: 
+    status: 
       code: 200
       message: OK
-    headers:
-      expires:
-      - Tue, 05 Jun 2012 13:32:59 GMT
-      date:
-      - Tue, 05 Jun 2012 13:32:59 GMT
-      cache-control:
-      - private, max-age=0, must-revalidate, no-transform
-      etag:
-      - ! '"x7b7CM3NJJxjvBv5TnpeqYvh3eE/uevXOyRggoQ0PtbYlcY3Q9KZ7jg"'
-      content-type:
-      - application/json; charset=UTF-8
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
+    headers: 
+      x-xss-protection: 
       - 1; mode=block
-      server:
+      date: 
+      - Thu, 07 Jun 2012 10:30:32 GMT
+      cache-control: 
+      - private, max-age=0, must-revalidate, no-transform
+      x-content-type-options: 
+      - nosniff
+      server: 
       - GSE
-      connection:
+      expires: 
+      - Thu, 07 Jun 2012 10:30:32 GMT
+      content-type: 
+      - application/json; charset=UTF-8
+      etag: 
+      - "\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/uevXOyRggoQ0PtbYlcY3Q9KZ7jg\""
+      x-frame-options: 
+      - SAMEORIGIN
+      connection: 
       - close
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        ewogImtpbmQiOiAiY2FsZW5kYXIjY2FsZW5kYXJMaXN0IiwKICJldGFnIjog
-        IlwieDdiN0NNM05KSnhqdkJ2NVRucGVxWXZoM2VFL1Z1aTNWRnk1WDBPQlA5
-        U00xc3JIbHE4UllSSVwiIiwKICJpdGVtcyI6IFsKICB7CiAgICJraW5kIjog
-        ImNhbGVuZGFyI2NhbGVuZGFyTGlzdEVudHJ5IiwKICAgImV0YWciOiAiXCJ4
-        N2I3Q00zTkpKeGp2QnY1VG5wZXFZdmgzZUUvNUYyczV1V1hOQVpnOF9Sbzhh
-        RmUzVjJtVllZXCIiLAogICAiaWQiOiAiI2NvbnRhY3RzQGdyb3VwLnYuY2Fs
-        ZW5kYXIuZ29vZ2xlLmNvbSIsCiAgICJzdW1tYXJ5IjogIkFubml2ZXJzYWly
-        ZXMgZXQgw6l2w6luZW1lbnRzIGRlcyBjb250YWN0cyIsCiAgICJkZXNjcmlw
-        dGlvbiI6ICJBbm5pdmVyc2FpcmVzIGV0IGRhdGVzIMOgIGPDqWzDqWJyZXIg
-        ZGUgdm9zIGNvbnRhY3RzIiwKICAgInRpbWVab25lIjogIkV1cm9wZS9adXJp
-        Y2giLAogICAiY29sb3JJZCI6ICIxMiIsCiAgICJzZWxlY3RlZCI6IHRydWUs
-        CiAgICJhY2Nlc3NSb2xlIjogInJlYWRlciIKICB9LAogIHsKICAgImtpbmQi
-        OiAiY2FsZW5kYXIjY2FsZW5kYXJMaXN0RW50cnkiLAogICAiZXRhZyI6ICJc
-        Ing3YjdDTTNOSkp4anZCdjVUbnBlcVl2aDNlRS9kWXlCMGQ2R0t3ZU4tZjhk
-        dG5wNUdaQVpUVGNcIiIsCiAgICJpZCI6ICJlXzJfZGUjd2Vla251bUBncm91
-        cC52LmNhbGVuZGFyLmdvb2dsZS5jb20iLAogICAic3VtbWFyeSI6ICJXb2No
-        ZW5udW1tZXJuIiwKICAgImRlc2NyaXB0aW9uIjogIldvY2hlbm51bW1lcm4g
-        d8O2Y2hlbnRsaWNoIGFuemVpZ2VuIiwKICAgInRpbWVab25lIjogIkV1cm9w
-        ZS9adXJpY2giLAogICAiY29sb3JJZCI6ICIyIiwKICAgImFjY2Vzc1JvbGUi
-        OiAicmVhZGVyIgogIH0sCiAgewogICAia2luZCI6ICJjYWxlbmRhciNjYWxl
-        bmRhckxpc3RFbnRyeSIsCiAgICJldGFnIjogIlwieDdiN0NNM05KSnhqdkJ2
-        NVRucGVxWXZoM2VFL3R0REF0dVdHa3NqMXptc2VoT3Jsem41Z19WMFwiIiwK
-        ICAgImlkIjogImp1bGllbi5oZW56ZWxpbkBsaXF1aWQtY29uY2VwdC5jaCIs
-        CiAgICJzdW1tYXJ5IjogIkp1bGllbiBIZW56ZWxpbiAobGlxdWlkKSIsCiAg
-        ICJsb2NhdGlvbiI6ICJMYXVzYW5uZSwgU3Vpc3NlIiwKICAgInRpbWVab25l
-        IjogIkV1cm9wZS9adXJpY2giLAogICAiY29sb3JJZCI6ICI4IiwKICAgInNl
-        bGVjdGVkIjogdHJ1ZSwKICAgImFjY2Vzc1JvbGUiOiAid3JpdGVyIgogIH0s
-        CiAgewogICAia2luZCI6ICJjYWxlbmRhciNjYWxlbmRhckxpc3RFbnRyeSIs
-        CiAgICJldGFnIjogIlwieDdiN0NNM05KSnhqdkJ2NVRucGVxWXZoM2VFL00z
-        YllkSlhQX2R2enl3NnhRV3JZTjdUczRUd1wiIiwKICAgImlkIjogInlhbm4u
-        bHVncmluQGxpcXVpZC1jb25jZXB0LmNoIiwKICAgInN1bW1hcnkiOiAiWWFu
-        biBMdWdyaW4gKGxpcXVpZCkiLAogICAibG9jYXRpb24iOiAiTGF1c2FubmUs
-        IFN1aXNzZSIsCiAgICJ0aW1lWm9uZSI6ICJFdXJvcGUvWnVyaWNoIiwKICAg
-        ImNvbG9ySWQiOiAiMSIsCiAgICJzZWxlY3RlZCI6IHRydWUsCiAgICJhY2Nl
-        c3NSb2xlIjogIndyaXRlciIKICB9LAogIHsKICAgImtpbmQiOiAiY2FsZW5k
-        YXIjY2FsZW5kYXJMaXN0RW50cnkiLAogICAiZXRhZyI6ICJcIng3YjdDTTNO
-        Skp4anZCdjVUbnBlcVl2aDNlRS9VZmNDVnd0eDRsMzVldkRvNVAxNzlRbXlf
-        ajhcIiIsCiAgICJpZCI6ICJuaWNvbGFzLmNvdXR1cmllckBsaXF1aWQtY29u
-        Y2VwdC5jaCIsCiAgICJzdW1tYXJ5IjogIm5pY29sYXMuY291dHVyaWVyQGxp
-        cXVpZC1jb25jZXB0LmNoIiwKICAgImxvY2F0aW9uIjogIkxhdXNhbm5lLCBT
-        dWlzc2UiLAogICAidGltZVpvbmUiOiAiRXVyb3BlL1p1cmljaCIsCiAgICJj
-        b2xvcklkIjogIjI0IiwKICAgInNlbGVjdGVkIjogdHJ1ZSwKICAgImFjY2Vz
-        c1JvbGUiOiAid3JpdGVyIgogIH0sCiAgewogICAia2luZCI6ICJjYWxlbmRh
-        ciNjYWxlbmRhckxpc3RFbnRyeSIsCiAgICJldGFnIjogIlwieDdiN0NNM05K
-        SnhqdkJ2NVRucGVxWXZoM2VFL1hYSExJcy1SRkVzbjRlUzZNNGtLUHdFN1lW
-        c1wiIiwKICAgImlkIjogIm5kdWJ1aXNAZ21haWwuY29tIiwKICAgInN1bW1h
-        cnkiOiAiTmV2aWxsZSBEdWJ1aXMiLAogICAidGltZVpvbmUiOiAiRXVyb3Bl
-        L1p1cmljaCIsCiAgICJjb2xvcklkIjogIjkiLAogICAic2VsZWN0ZWQiOiB0
-        cnVlLAogICAiYWNjZXNzUm9sZSI6ICJmcmVlQnVzeVJlYWRlciIKICB9LAog
-        IHsKICAgImtpbmQiOiAiY2FsZW5kYXIjY2FsZW5kYXJMaXN0RW50cnkiLAog
-        ICAiZXRhZyI6ICJcIng3YjdDTTNOSkp4anZCdjVUbnBlcVl2aDNlRS9DNFdC
-        TXlZa2FqRlREZXlJUHBNeTZsc1hUekVcIiIsCiAgICJpZCI6ICJsaXF1aWQt
-        Y29uY2VwdC5jaF9mYXV0ODVoMXUzaDJ1OTgzZDRlaG8ycm9wa0Bncm91cC5j
-        YWxlbmRhci5nb29nbGUuY29tIiwKICAgInN1bW1hcnkiOiAidGVzdCIsCiAg
-        ICJkZXNjcmlwdGlvbiI6ICJ0ZXN0IGFnZW5kYSBmb3IgZ2NhbE1hcHBlciIs
-        CiAgICJsb2NhdGlvbiI6ICJMYXVzYW5uZSwgU3Vpc3NlIiwKICAgInRpbWVa
-        b25lIjogIkV1cm9wZS9adXJpY2giLAogICAiY29sb3JJZCI6ICIzIiwKICAg
-        InNlbGVjdGVkIjogdHJ1ZSwKICAgImFjY2Vzc1JvbGUiOiAib3duZXIiCiAg
-        fSwKICB7CiAgICJraW5kIjogImNhbGVuZGFyI2NhbGVuZGFyTGlzdEVudHJ5
-        IiwKICAgImV0YWciOiAiXCJ4N2I3Q00zTkpKeGp2QnY1VG5wZXFZdmgzZUUv
-        cUd4dDljOE1TS2NjRDZ3bFJlWjlPbTVsMWNRXCIiLAogICAiaWQiOiAibmV2
-        aWxsZS5kdWJ1aXNAbGlxdWlkLWNvbmNlcHQuY2giLAogICAic3VtbWFyeSI6
-        ICJuZXZpbGxlLmR1YnVpc0BsaXF1aWQtY29uY2VwdC5jaCIsCiAgICJsb2Nh
-        dGlvbiI6ICJMYXVzYW5uZSwgU3Vpc3NlIiwKICAgInRpbWVab25lIjogIkV1
-        cm9wZS9adXJpY2giLAogICAiY29sb3JJZCI6ICIxNSIsCiAgICJzZWxlY3Rl
-        ZCI6IHRydWUsCiAgICJhY2Nlc3NSb2xlIjogIm93bmVyIiwKICAgImRlZmF1
-        bHRSZW1pbmRlcnMiOiBbCiAgICB7CiAgICAgIm1ldGhvZCI6ICJlbWFpbCIs
-        CiAgICAgIm1pbnV0ZXMiOiAxMAogICAgfSwKICAgIHsKICAgICAibWV0aG9k
-        IjogInBvcHVwIiwKICAgICAibWludXRlcyI6IDEwCiAgICB9CiAgIF0KICB9
-        LAogIHsKICAgImtpbmQiOiAiY2FsZW5kYXIjY2FsZW5kYXJMaXN0RW50cnki
-        LAogICAiZXRhZyI6ICJcIng3YjdDTTNOSkp4anZCdjVUbnBlcVl2aDNlRS9j
-        ZnJMTWduNkpoWGVqeUd0VDczQXljbGpiSGNcIiIsCiAgICJpZCI6ICJ5YW5u
-        Lmx1Z3JpbkBzYW5zLXNhdm9pci5uZXQiLAogICAic3VtbWFyeSI6ICJZYW5u
-        IEx1Z3JpbiAocHJpdsOpKSIsCiAgICJkZXNjcmlwdGlvbiI6ICJDYWxlbmRy
-        aWVyIHBlcnNvbm5lbCBkZSBZYW5uIEx1Z3JpbiIsCiAgICJsb2NhdGlvbiI6
-        ICJMYXVzYW5uZSwgU3Vpc3NlIiwKICAgInRpbWVab25lIjogIkV1cm9wZS9a
-        dXJpY2giLAogICAiY29sb3JJZCI6ICIyIiwKICAgInNlbGVjdGVkIjogdHJ1
-        ZSwKICAgImFjY2Vzc1JvbGUiOiAiZnJlZUJ1c3lSZWFkZXIiCiAgfSwKICB7
-        CiAgICJraW5kIjogImNhbGVuZGFyI2NhbGVuZGFyTGlzdEVudHJ5IiwKICAg
-        ImV0YWciOiAiXCJ4N2I3Q00zTkpKeGp2QnY1VG5wZXFZdmgzZUUvcnFTdTF3
-        b1lscXNmdXl0cmU0cGpSaG1BOWF3XCIiLAogICAiaWQiOiAianVsaWVuaGVu
-        emVsaW5AZ21haWwuY29tIiwKICAgInN1bW1hcnkiOiAiSnVsaWVuIEhlbnpl
-        bGluIC0gUHJpdsOpIiwKICAgInRpbWVab25lIjogIkV1cm9wZS9Sb21lIiwK
-        ICAgImNvbG9ySWQiOiAiMTgiLAogICAic2VsZWN0ZWQiOiB0cnVlLAogICAi
-        YWNjZXNzUm9sZSI6ICJmcmVlQnVzeVJlYWRlciIKICB9CiBdCn0K
-    http_version: '1.1'
-  recorded_at: Tue, 05 Jun 2012 13:32:59 GMT
-recorded_with: VCR 2.1.0
+    body: 
+      string: "{\n \"kind\": \"calendar#calendarList\",\n \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/Vui3VFy5X0OBP9SM1srHlq8RYRI\\\"\",\n \"items\": [\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/5F2s5uWXNAZg8_Ro8aFe3V2mVYY\\\"\",\n   \"id\": \"#contacts@group.v.calendar.google.com\",\n   \"summary\": \"Anniversaires et \xC3\xA9v\xC3\xA9nements des contacts\",\n   \"description\": \"Anniversaires et dates \xC3\xA0 c\xC3\xA9l\xC3\xA9brer de vos contacts\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"12\",\n   \"selected\": true,\n   \"accessRole\": \"reader\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/dYyB0d6GKweN-f8dtnp5GZAZTTc\\\"\",\n   \"id\": \"e_2_de#weeknum@group.v.calendar.google.com\",\n   \"summary\": \"Wochennummern\",\n   \"description\": \"Wochennummern w\xC3\xB6chentlich anzeigen\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"2\",\n   \"accessRole\": \"reader\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/ttDAtuWGksj1zmsehOrlzn5g_V0\\\"\",\n   \"id\": \"julien.henzelin@liquid-concept.ch\",\n   \"summary\": \"Julien Henzelin (liquid)\",\n   \"location\": \"Lausanne, Suisse\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"8\",\n   \"selected\": true,\n   \"accessRole\": \"writer\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/M3bYdJXP_dvzyw6xQWrYN7Ts4Tw\\\"\",\n   \"id\": \"yann.lugrin@liquid-concept.ch\",\n   \"summary\": \"Yann Lugrin (liquid)\",\n   \"location\": \"Lausanne, Suisse\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"1\",\n   \"selected\": true,\n   \"accessRole\": \"writer\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/UfcCVwtx4l35evDo5P179Qmy_j8\\\"\",\n   \"id\": \"nicolas.couturier@liquid-concept.ch\",\n   \"summary\": \"nicolas.couturier@liquid-concept.ch\",\n   \"location\": \"Lausanne, Suisse\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"24\",\n   \"selected\": true,\n   \"accessRole\": \"writer\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/XXHLIs-RFEsn4eS6M4kKPwE7YVs\\\"\",\n   \"id\": \"ndubuis@gmail.com\",\n   \"summary\": \"Neville Dubuis\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"9\",\n   \"selected\": true,\n   \"accessRole\": \"freeBusyReader\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/C4WBMyYkajFTDeyIPpMy6lsXTzE\\\"\",\n   \"id\": \"liquid-concept.ch_faut85h1u3h2u983d4eho2ropk@group.calendar.google.com\",\n   \"summary\": \"test\",\n   \"description\": \"test agenda for gcalMapper\",\n   \"location\": \"Lausanne, Suisse\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"3\",\n   \"selected\": true,\n   \"accessRole\": \"owner\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/qGxt9c8MSKccD6wlReZ9Om5l1cQ\\\"\",\n   \"id\": \"neville.dubuis@liquid-concept.ch\",\n   \"summary\": \"neville.dubuis@liquid-concept.ch\",\n   \"location\": \"Lausanne, Suisse\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"15\",\n   \"selected\": true,\n   \"accessRole\": \"owner\",\n   \"defaultReminders\": [\n    {\n     \"method\": \"email\",\n     \"minutes\": 10\n    },\n    {\n     \"method\": \"popup\",\n     \"minutes\": 10\n    }\n   ]\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/cfrLMgn6JhXejyGtT73AycljbHc\\\"\",\n   \"id\": \"yann.lugrin@sans-savoir.net\",\n   \"summary\": \"Yann Lugrin (priv\xC3\xA9)\",\n   \"description\": \"Calendrier personnel de Yann Lugrin\",\n   \"location\": \"Lausanne, Suisse\",\n   \"timeZone\": \"Europe/Zurich\",\n   \"colorId\": \"2\",\n   \"selected\": true,\n   \"accessRole\": \"freeBusyReader\"\n  },\n  {\n   \"kind\": \"calendar#calendarListEntry\",\n   \"etag\": \"\\\"x7b7CM3NJJxjvBv5TnpeqYvh3eE/rqSu1woYlqsfuytre4pjRhmA9aw\\\"\",\n   \"id\": \"julienhenzelin@gmail.com\",\n   \"summary\": \"Julien Henzelin - Priv\xC3\xA9\",\n   \"timeZone\": \"Europe/Rome\",\n   \"colorId\": \"18\",\n   \"selected\": true,\n   \"accessRole\": \"freeBusyReader\"\n  }\n ]\n\
+        }\n"
+    http_version: "1.1"
+  recorded_at: Thu, 07 Jun 2012 10:30:32 GMT
