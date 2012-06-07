@@ -40,8 +40,6 @@ and open a new api account :
 7. chose the type between "service account" and "installed app"
 8. click "create client id"
 
-for now we recommend to open an installed app account, the service account don't work anymore with google calendar.
-
 once you have your "installed app" access run :
 
     $ gcal-mapper --client_id [CLIENT_ID] --client_secret [CLIENT_SECRET]
@@ -319,45 +317,15 @@ for `extendedProperties` you can do `extendedProperties.private` but `extendedPr
 Test
 ----
 
-To launch test yourself, you need somme file and some and google API acess via
-the console.
-
-don't forget
-
-    $ bundle install
-
-then go to : https://code.google.com/apis/console and open a new api account :
-
-1. click on "Services" on the rigth top menu
-2. click on the toggle button next to "Calendar API"
-3. accept the license
-4. click on "API Access" on the rigth top menu
-5. click on the blue button "Create an Oauth2.0 Client ID ..."
-6. provide a name for the API and click next
-7. chose the type between "service account" and "installed app"
-8. click "create client id"
-
-For testing purpose you need to do both, don't forget to save the file that
-google ask to download. You can use service account only if you manage your
-domain with google. But you have to go to your google apps manager :
-
-1. go to "Advenced tools" -> "Manage api client acess"
-2. enter your client id(service account) in "client name"
-3. enter "http(s)://www.google.com/calendar/feeds/" in "scope"
-4. click "authorize"
-
-Now you can access google calendar with this api
-
-copy the file ".p12" to spec/file/privatekey.p12
+to launch test you need to have files to do both authentification methodes
 
 execute, with the data of the installed app
 
     gcal-mapper --client_id [CLIENT_ID] --client_secret [CLIENT_SECRET]
 
-it should open a new page, click accept that the API acess your data.
-this gives you ~/google_auth.yaml copy it on spec/file/google_auth.yaml
-(you can change path with --file /path/to/the/yaml_file.yaml)
-(you can change scope with --scope https://www.googleapis.com/another/scope)
+copy the file ".p12" to "spec/file/privatekey.p12"
+copy the file "~/google_auth.yaml" to "spec/file/google_auth.yaml"
+
 
 then create spec/file/config.yaml, must look like this :
 
@@ -375,6 +343,11 @@ then run
     rake spec
 
 test's are running!
+
+### Warning ##
+
+Ruby 1.8.7 does not support the vcr cassettes generate by 1.9.x, but 1.8.7 cassettes work with 1.9.x.
+D'ont forget to remove the cassettes before testing with 1.8.7 if you already tested with 1.9.x.
 
 Contributing
 ------------
