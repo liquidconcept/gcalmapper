@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ['neville.dubuis@liquid-concept.ch']
   gem.description   = %q{A library to map Google Calendar events with an ORM}
   gem.summary       = %q{A library to map Google Calendar events with an ORM}
-  gem.homepage      = 'http://rubygems.org/gems/gcalmapper'
+  gem.homepage      = 'http://rubygems.org/gems/gcal_mapper'
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = ['gcal-mapper']
